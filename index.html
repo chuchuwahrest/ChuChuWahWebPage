@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chu-Chu-Wah | El Expreso del Sabor — Jaruco, Mayabeque</title>
-<!-- Favicon (icono en la pestaña) - Cambia la ruta si tu logo tiene otro nombre -->
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -34,25 +33,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 40px;
+    padding: 12px 15px;
     background: rgba(0,0,0,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(192,0,26,0.3);
   }
   .nav-logo-img {
-    height: 50px;
+    height: 40px;
     width: auto;
     display: block;
   }
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: 10px;
+  }
   .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 16px;
     list-style: none;
   }
   .nav-links a {
     color: rgba(255,255,255,0.75);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -61,9 +70,9 @@
   .nav-links a:hover { color: var(--amarillo); }
   .currency-switcher {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     background: rgba(0,0,0,0.6);
-    padding: 6px 12px;
+    padding: 4px 8px;
     border-radius: 40px;
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255,215,0,0.3);
@@ -73,9 +82,9 @@
     border: none;
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 1px;
-    padding: 6px 14px;
+    padding: 4px 10px;
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.2s;
@@ -87,6 +96,34 @@
     box-shadow: 0 0 6px rgba(255,215,0,0.5);
   }
   .currency-btn:last-child.active { background: #25D366; color: #0F0F0F; }
+  /* Language Switcher */
+  .lang-switcher {
+    display: flex;
+    gap: 8px;
+    background: rgba(0,0,0,0.6);
+    padding: 4px 8px;
+    border-radius: 40px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,215,0,0.3);
+    margin-left: 10px;
+  }
+  .lang-btn {
+    background: transparent;
+    border: none;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: rgba(255,255,255,0.6);
+  }
+  .lang-btn.active {
+    background: var(--amarillo);
+    color: var(--oscuro);
+  }
   /* HERO con carrusel */
   .hero {
     min-height: 100vh;
@@ -95,27 +132,42 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 120px 40px 80px;
+    padding: 120px 20px 80px;
     position: relative;
     overflow: hidden;
-    /* Fondo general desde img/bg.png (fallback a imagen online si no existe) */
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
-                url('img/bg.png');
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('img/bg.png');
     background-size: cover;
     background-position: center 30%;
     background-attachment: fixed;
   }
-  /* Fallback si no existe bg.png */
-  @supports (background-image: url('img/bg.png')) {
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
-                  url('img/bg.png');
-      background-size: cover;
-      background-position: center 30%;
-      background-attachment: fixed;
-    }
+  .status-banner {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 99;
+    background: rgba(0,0,0,0.8);
   }
-  /* Carrusel mejorado - más grande y adaptable */
+  .status-open { color: #4CAF50; }
+  .status-closing { color: #FF9800; }
+  .status-closed { color: #F44336; }
+  .digital-only {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    background: rgba(0,0,0,0.8);
+    color: var(--amarillo);
+    z-index: 99;
+  }
+  /* Carrusel mejorado */
   .carousel-container {
     position: relative;
     width: 95%;
@@ -180,7 +232,7 @@
     background: var(--amarillo);
   }
   .hero-logo {
-    max-width: 280px;
+    max-width: 200px;
     width: 80%;
     margin-bottom: 20px;
     filter: drop-shadow(0 0 8px rgba(0,0,0,0.5));
@@ -197,7 +249,7 @@
   }
   .hero-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 14vw, 160px);
+    font-size: clamp(48px, 12vw, 80px);
     line-height: 0.9;
     letter-spacing: 4px;
     color: var(--blanco);
@@ -289,7 +341,7 @@
     color: rgba(255,255,255,0.7);
   }
   section {
-    padding: 80px 40px;
+    padding: 50px 20px;
     max-width: 1200px;
     margin: 0 auto 2rem auto;
     background: rgba(15,15,15,0.7);
@@ -306,7 +358,7 @@
   }
   .section-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: clamp(32px, 6vw, 56px);
     line-height: 1;
     letter-spacing: 2px;
     color: var(--blanco);
@@ -324,14 +376,14 @@
   .combos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    margin-top: 48px;
+    gap: 20px;
+    margin-top: 32px;
   }
   .combo-card {
     background: var(--gris);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 12px;
-    padding: 28px;
+    padding: 20px;
     transition: transform 0.3s, border-color 0.3s;
     position: relative;
     overflow: hidden;
@@ -359,7 +411,7 @@
   }
   .combo-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
+    font-size: 24px;
     letter-spacing: 1px;
     color: var(--blanco);
     margin-bottom: 14px;
@@ -429,7 +481,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 12px;
-    margin-top: 40px;
+    margin-top: 32px;
   }
   .bebida-item {
     padding: 12px;
@@ -569,16 +621,17 @@
   .agrego-item label { display: flex; align-items: center; gap: 8px; }
   .modal-buttons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
   @media (max-width: 768px) {
-    nav { padding: 10px 20px; flex-wrap: wrap; }
-    .nav-logo-img { height: 40px; }
-    .nav-links { display: none; }
-    section { padding: 50px 20px; margin: 0 10px 20px 10px; }
-    .hero-logo { max-width: 200px; }
+    .hamburger { display: block; }
+    .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: rgba(0,0,0,0.9); padding: 10px 20px; margin: 0; }
+    .nav-links.show { display: flex; flex-direction: column; gap: 8px; }
+    .nav-links a { font-size: 14px; padding: 8px 0; }
+    .currency-switcher, .lang-switcher { margin-top: 10px; }
     .carousel-container { width: 100%; border-radius: 12px; }
     .carousel-btn { font-size: 1.8rem; padding: 0 10px; }
     .prev { left: 5px; }
     .next { right: 5px; }
     .carousel-slide img { max-height: 300px; }
+    .cart-drawer { width: 100%; max-width: 100%; }
   }
   .fade-in {
     opacity: 0;
@@ -594,23 +647,53 @@
 </head>
 <body>
 
+<script>
+  // Redirigir o bloquear si no es móvil
+  function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") ||
+           (navigator.userAgent.indexOf('IEMobile') !== -1) ||
+           (navigator.userAgent.indexOf('Android') !== -1) ||
+           (navigator.userAgent.indexOf('iPhone') !== -1) ||
+           (navigator.userAgent.indexOf('iPad') !== -1);
+  }
+
+  if (!isMobileDevice()) {
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.innerHTML = `
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0F0F0F; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; z-index: 99999;">
+          <img src="logo.png" alt="ChuChuWah Logo" style="width: 120px; margin-bottom: 20px;">
+          <h1 style="font-family: 'Bebas Neue', sans-serif; font-size: 48px; margin-bottom: 16px;">ChuChuWah</h1>
+          <p style="font-size: 18px; margin-bottom: 20px;">Esta web solo está disponible para dispositivos móviles.</p>
+          <p style="font-size: 16px;">Por favor, accede desde tu teléfono.</p>
+        </div>
+      `;
+    });
+  }
+</script>
+
 <nav>
   <img src="logo.png" alt="ChuChuWah Logo" class="nav-logo-img">
-  <ul class="nav-links">
+  <button class="hamburger" id="hamburger">☰</button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#combos">Combos</a></li>
     <li><a href="#menu">Menú</a></li>
     <li><a href="#bebidas">Bebidas</a></li>
-    <li><a href="lmr.html">Lo más pedido</a></li>
+    <li><a href="lmp.html">Lo más pedido</a></li>
     <li><a href="#info">Info</a></li>
   </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="es">ES</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
   <div class="currency-switcher">
     <button class="currency-btn active" data-currency="cup">🇨🇺 CUP</button>
     <button class="currency-btn" data-currency="usd">💵 USD</button>
   </div>
 </nav>
 
+<div class="status-banner" id="statusBanner"></div>
+
 <div class="hero">
-  <!-- Carrusel de imágenes promocionales desde carpeta img/ -->
   <div class="carousel-container" id="carousel">
     <div class="carousel-slides" id="carouselSlides"></div>
     <button class="carousel-btn prev" id="prevBtn">❮</button>
@@ -631,6 +714,10 @@
     <div class="badge"><span class="badge-icon">🛵</span><span class="badge-text">Delivery Mayabeque</span></div>
     <div class="badge"><span class="badge-icon">💳</span><span class="badge-text">Zelle & CUP</span></div>
   </div>
+</div>
+
+<div class="digital-only">
+  Solo para pedidos digitales. No se atiende presencialmente.
 </div>
 
 <div class="divider"></div>
@@ -668,14 +755,14 @@
   <h2 class="section-title fade-in">INFORMACIÓN <em>& CONTACTO</em></h2>
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
     <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">📍</div><div style="font-weight: bold;">Jaruco, Mayabeque</div><div>Cuba, cerca del tren Hershey</div></div>
-    <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">🕐</div><div style="font-weight: bold;">Horario</div><div>11am – 10pm (Delivery hasta 6pm)</div></div>
+    <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">🕐</div><div style="font-weight: bold;">Horario</div><div>11am – 10pm (Delivery hasta 10pm)</div></div>
     <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">📞</div><div style="font-weight: bold;">Contacto</div><div><a href="tel:47874242" style="color: var(--amarillo);">47874242</a><br><a href="https://wa.me/5350993981" style="color: var(--amarillo);">WhatsApp +53 50993981</a></div></div>
   </div>
 </section>
 
 <footer style="background: #080808; padding: 40px; text-align: center; margin-top: 40px;">
   <div class="footer-logo" style="font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--amarillo);">CHU·CHU·WAH</div>
-  <div class="footer-copy" style="color: #555; margin-top: 12px;">© 2025 Restaurante ChuChuWah · Jaruco, Cuba</div>
+  <div class="footer-copy" style="color: #555; margin-top: 12px;">© 2026 Restaurante ChuChuWah · Jaruco, Cuba</div>
 </footer>
 
 <!-- CARRITO DRAWER -->
@@ -817,407 +904,41 @@
   let carrito = [];
   let currentCurrency = "cup";
   let pendingProduct = null;
+  let currentLang = "es";
 
-  function getPriceValue(cup, usd) { return currentCurrency === "cup" ? cup : usd; }
-  function formatPrice(valor) {
-    if (currentCurrency === "cup") return Math.round(valor) + " CUP";
-    else return "$" + valor.toFixed(2) + " USD";
-  }
-  function syncPaymentMethodWithCurrency() {
-    const paymentSelect = document.getElementById("paymentMethod");
-    if (paymentSelect) paymentSelect.value = currentCurrency === "cup" ? "CUP (efectivo)" : "Zelle (USD)";
-  }
-  function syncCurrencyWithPaymentMethod() {
-    const paymentSelect = document.getElementById("paymentMethod");
-    if (paymentSelect) {
-      const newCurrency = paymentSelect.value === "CUP (efectivo)" ? "cup" : "usd";
-      if (newCurrency !== currentCurrency) setCurrency(newCurrency);
-    }
-  }
+  // ======================== IDIOMA ========================
+  const translations = {
+    es: {
+      heroTitle: "CHU<span>CHU</span>WAH",
+      heroSubtitle: "El Expreso del Sabor",
+      heroDesc: "Comida cubana con alma propia. Pollos, pizzas, mariscos, carnes y mucho más — directo a tu mesa o a tu puerta en todo Mayabeque.",
+      combosTitle: "COMBOS <em>ESPECIALES</em>",
+      menuTitle: "MENÚ <em>COMPLETO</em>",
+      bebidasTitle: "NUESTRAS <em>BEBIDAS</em>",
+      bebidasNota: "El precio de las bebidas se consulta al momento del pedido. Se añaden sin costo en el carrito y se facturan aparte.",
+      pedidoTitle: "¿LISTO PARA PEDIR?",
+      pedidoSub: "Delivery disponible a todo Mayabeque • Lunes a Domingo 11am – 10pm",
+      infoTitle: "INFORMACIÓN <em>& CONTACTO</em>",
+      cartTitle: "Tu Pedido",
+      checkoutBtn: "📲 Pedir por WhatsApp",
+      open: "Abierto",
+      closing: "A punto de cerrar",
+      closed: "Cerrado",
+      digitalOnly: "Solo para pedidos digitales. No se atiende presencialmente."
+    },
+    en: {
+      heroTitle: "CHU<span>CHU</span>WAH",
+      heroSubtitle: "The Flavor Express",
+      heroDesc: "Cuban food with its own soul. Chicken, pizzas, seafood, meats and much more — straight to your table or door throughout Mayabeque.",
+      combosTitle: "SPECIAL <em>COMBOS</em>",
+      menuTitle: "FULL <em>MENU</em>",
+      bebidasTitle: "OUR <em>DRINKS</em>",
+      bebidasNota: "The price of drinks is consulted at the time of order. They are added to the cart at no cost and billed separately.",
+      pedidoTitle: "READY TO ORDER?",
+      pedidoSub: "Delivery available throughout Mayabeque • Monday to Sunday 11am – 10pm",
 
-  function renderCombos() {
-    const container = document.getElementById("combos-container");
-    container.innerHTML = combosData.map(c => `
-      <div class="combo-card ${c.pareja ? 'pareja' : ''} fade-in">
-        <div class="combo-emoji">${c.emoji}</div>
-        <div class="combo-num">${c.pareja ? 'Pareja' : 'Combo'}</div>
-        <div class="combo-name">${c.nombre}</div>
-        <ul class="combo-items">${c.items.map(i => `<li>${i}</li>`).join('')}</ul>
-        <div class="combo-price">
-          <span class="combo-price-value" data-cup="${c.cup} CUP" data-usd="$${c.usd} USD">${currentCurrency === "cup" ? c.cup + " CUP" : "$" + c.usd + " USD"}</span>
-          <button class="add-to-cart-btn" data-nombre="${c.nombre}" data-cup="${c.cup}" data-usd="${c.usd}" data-tipo="combo">Agregar</button>
-        </div>
-      </div>
-    `).join('');
-    document.querySelectorAll('.add-to-cart-btn[data-tipo="combo"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const nombre = btn.dataset.nombre;
-        const cup = parseFloat(btn.dataset.cup);
-        const usd = parseFloat(btn.dataset.usd);
-        agregarAlCarrito({ nombre, cup, usd, tipo: "combo" }, 1, []);
-      });
-    });
-  }
 
-  function renderMenu() {
-    const container = document.getElementById("menu-container");
-    const categorias = {
-      "🍗 Pollo & Cerdo": ["Bistec de pollo","Pollo asado","Has Gordon Blue de pollo","Juliana de pollo","Fajitas de pollo empanizadas","Fricase de pollo","Alitas de pollo","Bistec de cerdo grille","Bistec Uruguaito","Juliana de cerdo","Fajita de cerdo empanizada","Suprema de cerdo","Fricase de cerdo","Masa de cerdo frita","Rolitillo de cerdo","Chuletas de cerdo ahumado","Lonjas de cerdo asado","Juliana mixta","Padre mixta empanizada","San Jacobo (jamón y queso)","Lomo ahumado"],
-      "🍕 Pizzas": ["Pizza Chuchu Napole","Pizza Gouda Napole","Pizza ChuChuWah Napole","Pizza ChuChuWah Gouda","Pizza Chuchu 4 Estaciones","Pizza Gouda 4 Estaciones","Pizza Gouda Vegetales"],
-      "🦐 Mariscos & Pescado": ["Coctel de atún","Eperlan entrante","Filete de pescado grille","Filete de pescado canciller","Filetillo de pescado","Filete de pescado con camarón"],
-      "🍝 Pastas": ["Spaghetti de queso Gouda"],
-      "☕ Cafetería & Panes": ["Pan con bistec","Bocadito de jamón","Bocadito de jamón y queso","Super hamburgueza","Super Expreso ChuChuWah","Pan con hamburgueza pollo","Café expreso","Café cortadito","Batido de frutas","Batido de chocolate","Batido de Mamey","Pan con 2 croquetas"],
-      "🥗 Entremeses": ["Entremeses surtido","Entremés ChuChuWah","Bolitas de jamón","Bolitas de queso Gouda","Croquetas (6 unidades)","Picadera ChuChuWah","Ensalada fría","Buñuelos en almíbar"],
-      "🍚 Guarniciones": ["Ensalada","Arroz frito","Arroz blanco","Arroz moro","Papas pre fritas","Vianda frita","Vianda hervida"]
-    };
-    let html = "";
-    for (let [cat, items] of Object.entries(categorias)) {
-      html += `<div class="menu-category fade-in" style="margin-bottom: 2rem;"><div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(192,0,26,0.3); padding-bottom: 8px;"><span style="font-size: 24px;">${cat.split(' ')[0]}</span><span style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--amarillo);">${cat.substring(2)}</span></div><div class="menu-items-grid">`;
-      items.forEach(nombre => {
-        const p = productosData[nombre];
-        if (!p) return;
-        const precioMostrado = currentCurrency === "cup" ? p.cup + " CUP" : "$" + p.usd + " USD";
-        html += `<div class="menu-item"><span class="menu-item-name">${nombre}</span><span class="price-value" data-cup="${p.cup}" data-usd="${p.usd}">${precioMostrado}</span><button class="small-add-btn" data-nombre="${nombre}" data-tipo="${p.tipo}" data-cup="${p.cup}" data-usd="${p.usd}">+</button></div>`;
-      });
-      html += `</div></div>`;
-    }
-    container.innerHTML = html;
-    document.querySelectorAll('.small-add-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const nombre = btn.dataset.nombre;
-        const tipo = btn.dataset.tipo;
-        const cup = parseFloat(btn.dataset.cup);
-        const usd = parseFloat(btn.dataset.usd);
-        if (tipo === "pizza" || tipo === "pasta" || tipo === "pan") {
-          pendingProduct = { nombre, cup, usd, tipo };
-          mostrarModalAgregos(tipo);
-        } else {
-          agregarAlCarrito({ nombre, cup, usd, tipo }, 1, []);
-        }
-      });
-    });
-  }
+Sign inSign up
 
-  function mostrarModalAgregos(tipoProducto) {
-    let filtrados = todosAgregos.filter(ag => ag.para.includes(tipoProducto));
-    if (tipoProducto === "pan") filtrados = filtrados.filter(ag => !["Hawaiana", "Piña", "Aceituna"].includes(ag.nombre));
-    const container = document.getElementById("agregosList");
-    container.innerHTML = filtrados.map(ag => `
-      <div class="agrego-item">
-        <label><input type="checkbox" value="${ag.nombre}" data-cup="${ag.cup}" data-usd="${ag.usd}"> ${ag.nombre}</label>
-        <span>${currentCurrency === "cup" ? ag.cup + " CUP" : "$" + ag.usd + " USD"}</span>
-      </div>
-    `).join('');
-    document.getElementById("modalTitle").innerText = `Agregar extras a ${pendingProduct.nombre}`;
-    document.getElementById("agregosModal").style.display = "flex";
-  }
 
-  function agregarAlCarrito(productoBase, cantidad, agregosSeleccionados) {
-    const precioBase = getPriceValue(productoBase.cup, productoBase.usd);
-    const extraCosto = agregosSeleccionados.reduce((sum, ag) => sum + getPriceValue(ag.cup, ag.usd), 0);
-    const precioUnitario = precioBase + extraCosto;
-    const key = JSON.stringify({ nombre: productoBase.nombre, agregos: agregosSeleccionados.map(a=>a.nombre).sort() });
-    const existing = carrito.find(item => JSON.stringify({ nombre: item.nombre, agregos: item.agregos.map(a=>a.nombre).sort() }) === key);
-    if (existing) existing.cantidad += cantidad;
-    else carrito.push({ id: Date.now()+Math.random(), nombre: productoBase.nombre, tipo: productoBase.tipo, precioUnitario, cantidad, agregos: agregosSeleccionados, baseCup: productoBase.cup, baseUsd: productoBase.usd });
-    actualizarCarrito();
-  }
-
-  function actualizarCarrito() {
-    const cartContainer = document.getElementById("cartItems");
-    let subtotal = 0, cajasPizza = 0, termopacks = 0;
-    carrito.forEach(item => {
-      subtotal += item.precioUnitario * item.cantidad;
-      if (item.tipo === "pizza") cajasPizza += item.cantidad;
-      else if (item.tipo === "comida" || item.tipo === "pasta" || item.tipo === "pan") termopacks += item.cantidad;
-    });
-    const precioCaja = currentCurrency === "cup" ? 60 : 0.19;
-    const precioTermo = currentCurrency === "cup" ? 100 : 0.31;
-    let totalEmpaque = (cajasPizza * precioCaja) + (termopacks * precioTermo);
-    let deliveryCost = 0;
-    let deliveryNote = "";
-    const deliveryType = document.getElementById("deliveryType")?.value;
-    if (deliveryType === "delivery") deliveryCost = currentCurrency === "cup" ? 200 : 0.52;
-    else if (deliveryType === "outside") {
-      deliveryCost = 0;
-      deliveryNote = " (precio a consultar)";
-    }
-    let total = subtotal + totalEmpaque + deliveryCost;
-
-    cartContainer.innerHTML = carrito.map((item, idx) => `
-      <div class="cart-item">
-        <div class="cart-item-title">${item.nombre} x${item.cantidad} <strong>${formatPrice(item.precioUnitario * item.cantidad)}</strong></div>
-        ${item.agregos.length ? `<div class="cart-item-agregos">+ ${item.agregos.map(a=>a.nombre).join(', ')}</div>` : ''}
-        <div class="cart-item-controls">
-          <button onclick="cambiarCantidad(${idx}, -1)">-</button>
-          <span>${item.cantidad}</span>
-          <button onclick="cambiarCantidad(${idx}, 1)">+</button>
-          <button class="remove-item" onclick="eliminarItem(${idx})">Eliminar</button>
-        </div>
-      </div>
-    `).join('');
-    if (carrito.length === 0) cartContainer.innerHTML = "<p>Tu carrito está vacío</p>";
-    document.getElementById("totalsArea").innerHTML = `
-      <p><span>Subtotal:</span><span>${formatPrice(subtotal)}</span></p>
-      <p><span>Empaque (caja pizza x${cajasPizza} / termopack x${termopacks}):</span><span>${formatPrice(totalEmpaque)}</span></p>
-      <p><span>Mensajería:</span><span>${deliveryType === "outside" ? "A consultar" : formatPrice(deliveryCost)}</span></p>
-      <hr><p><strong>Total:</strong><strong>${deliveryType === "outside" ? formatPrice(total) + " + envío a confirmar" : formatPrice(total)}</strong></p>
-    `;
-    document.getElementById("cartCount").innerText = carrito.reduce((acc, i) => acc + i.cantidad, 0);
-  }
-
-  window.cambiarCantidad = (idx, delta) => {
-    let newCant = carrito[idx].cantidad + delta;
-    if (newCant <= 0) carrito.splice(idx, 1);
-    else carrito[idx].cantidad = newCant;
-    actualizarCarrito();
-  };
-  window.eliminarItem = (idx) => { carrito.splice(idx, 1); actualizarCarrito(); };
-
-  function enviarPedidoWhatsApp() {
-    let mensaje = "🍽️ *NUEVO PEDIDO CHUCHUWAH*%0A";
-    let subtotal = 0, cajas = 0, termo = 0;
-    carrito.forEach(item => {
-      subtotal += item.precioUnitario * item.cantidad;
-      if (item.tipo === "pizza") cajas += item.cantidad;
-      else if (item.tipo === "comida" || item.tipo === "pasta" || item.tipo === "pan") termo += item.cantidad;
-      mensaje += `%0A• ${item.nombre} x${item.cantidad} - ${formatPrice(item.precioUnitario * item.cantidad)}`;
-      if (item.agregos.length) mensaje += ` (Agregos: ${item.agregos.map(a=>a.nombre).join(', ')})`;
-    });
-    const precioCaja = currentCurrency === "cup" ? 60 : 0.19;
-    const precioTermo = currentCurrency === "cup" ? 100 : 0.31;
-    let totalEmpaque = (cajas * precioCaja) + (termo * precioTermo);
-    let deliveryCost = 0;
-    let deliveryNote = "";
-    const deliveryType = document.getElementById("deliveryType")?.value;
-    let direccion = "", nombreDestino = "", telefonoDestino = "";
-    if (deliveryType === "delivery") {
-      deliveryCost = currentCurrency === "cup" ? 200 : 0.52;
-      direccion = document.getElementById("direccion")?.value || "";
-      nombreDestino = document.getElementById("nombreDestino")?.value || "";
-      telefonoDestino = document.getElementById("telefonoDestino")?.value || "";
-      mensaje += `%0A%0A🚚 *Delivery a domicilio (Jaruco)* - Costo: ${formatPrice(deliveryCost)}`;
-      mensaje += `%0A📍 Dirección: ${direccion}`;
-      mensaje += `%0A👤 Recibe: ${nombreDestino}`;
-      mensaje += `%0A📞 Celular: ${telefonoDestino}`;
-    } else if (deliveryType === "outside") {
-      deliveryCost = 0;
-      direccion = document.getElementById("direccion")?.value || "";
-      nombreDestino = document.getElementById("nombreDestino")?.value || "";
-      telefonoDestino = document.getElementById("telefonoDestino")?.value || "";
-      mensaje += `%0A%0A🚚 *Delivery fuera de Jaruco* - Costo a acordar con el cliente`;
-      mensaje += `%0A📍 Dirección: ${direccion}`;
-      mensaje += `%0A👤 Recibe: ${nombreDestino}`;
-      mensaje += `%0A📞 Celular: ${telefonoDestino}`;
-    } else {
-      mensaje += `%0A%0A🥡 *Para llevar*`;
-    }
-    let total = subtotal + totalEmpaque + deliveryCost;
-    mensaje += `%0A%0A📦 Empaque: +${formatPrice(totalEmpaque)}`;
-    if (deliveryType === "outside") mensaje += `%0A💰 *Total (sin envío): ${formatPrice(total)}*`;
-    else mensaje += `%0A💰 *Total: ${formatPrice(total)}*`;
-    const metodoPago = document.getElementById("paymentMethod")?.value;
-    mensaje += `%0A💳 Método de pago: ${metodoPago}`;
-    const notas = document.getElementById("notas")?.value;
-    if (notas) mensaje += `%0A%0A📝 Notas: ${notas}`;
-    mensaje += `%0A%0A¡Gracias por tu pedido! 🚂`;
-    window.open(`https://wa.me/5350993981?text=${mensaje}`, "_blank");
-  }
-
-  function setCurrency(currency) {
-    currentCurrency = currency;
-    document.querySelectorAll('.currency-btn').forEach(btn => {
-      if (btn.dataset.currency === currency) btn.classList.add('active');
-      else btn.classList.remove('active');
-    });
-    document.querySelectorAll('.combo-price-value').forEach(el => {
-      const cupVal = el.getAttribute('data-cup');
-      const usdVal = el.getAttribute('data-usd');
-      if (cupVal && usdVal) el.innerText = currency === "cup" ? cupVal : usdVal;
-    });
-    document.querySelectorAll('.price-value').forEach(el => {
-      const cupVal = el.getAttribute('data-cup');
-      const usdVal = el.getAttribute('data-usd');
-      if (cupVal && usdVal) el.innerText = currency === "cup" ? cupVal + " CUP" : "$" + usdVal + " USD";
-      else if (el.getAttribute('data-cup')) {
-        const cup = parseFloat(el.getAttribute('data-cup'));
-        const usd = parseFloat(el.getAttribute('data-usd'));
-        el.innerText = currency === "cup" ? cup + " CUP" : "$" + usd + " USD";
-      }
-    });
-    actualizarCarrito();
-    syncPaymentMethodWithCurrency();
-  }
-
-  function renderBebidas() {
-    const bebidas = ["Tigón","Malta","Agua Natural Grande","Agua Natural Pequeño","Presidente / Widmill","Heniken / Corona","Energizante","Jugo de Lata","Caja de Jugo","Shaka","Néctar / Limonada","Coca Cola","Kermato","Cristal / Bucanero","Pomo de Refresco","Hollandia / Lander","Refresco Vaso","Redbull","Refresco Importado","Batido Mango / Guayaba","Go Tropic Morena","Go Tropic Roja","Batido de Chocolate","Vaso de Dispensada","Jarra de Dispensada","Termo de Dispensada"];
-    const container = document.getElementById("bebidas-container");
-    container.innerHTML = bebidas.map(b => `<div class="bebida-item"><span>${b}</span><button class="add-bebida" data-nombre="${b}">Agregar</button></div>`).join('');
-    document.querySelectorAll('.add-bebida').forEach(btn => {
-      btn.addEventListener('click', () => agregarAlCarrito({ nombre: btn.dataset.nombre, cup: 0, usd: 0, tipo: "bebida" }, 1, []));
-    });
-  }
-
-  function setupDeliveryEvents() {
-    const deliverySelect = document.getElementById("deliveryType");
-    const deliveryFields = document.getElementById("deliveryFields");
-    if (deliverySelect) {
-      deliverySelect.addEventListener("change", () => {
-        // Mostrar campos de dirección para cualquier tipo de delivery (incluyendo fuera de Jaruco)
-        if (deliverySelect.value === "delivery" || deliverySelect.value === "outside") {
-          deliveryFields.style.display = "block";
-        } else {
-          deliveryFields.style.display = "none";
-        }
-        actualizarCarrito();
-      });
-      deliverySelect.dispatchEvent(new Event('change'));
-    }
-  }
-
-  // ======================== CARRUSEL ========================
-  let currentSlide = 0;
-  let slideImages = [];
-  let autoSlideInterval;
-
-  function loadCarouselImages() {
-    const maxAttempts = 20;
-    const promises = [];
-    for (let i = 1; i <= maxAttempts; i++) {
-      const img = new Image();
-      img.src = `img/${i}.png`;
-      promises.push(new Promise((resolve) => {
-        img.onload = () => resolve({ id: i, src: `img/${i}.png` });
-        img.onerror = () => resolve(null);
-      }));
-    }
-    Promise.all(promises).then(results => {
-      slideImages = results.filter(r => r !== null);
-      if (slideImages.length === 0) {
-        document.getElementById("carousel").style.display = "none";
-        return;
-      }
-      buildCarousel();
-      startAutoSlide();
-    });
-  }
-
-  function buildCarousel() {
-    const slidesContainer = document.getElementById("carouselSlides");
-    const dotsContainer = document.getElementById("carouselDots");
-    slidesContainer.innerHTML = "";
-    dotsContainer.innerHTML = "";
-    slideImages.forEach((img, index) => {
-      const slideDiv = document.createElement("div");
-      slideDiv.className = "carousel-slide";
-      slideDiv.innerHTML = `<img src="${img.src}" alt="Promoción ${img.id}">`;
-      slidesContainer.appendChild(slideDiv);
-      const dot = document.createElement("span");
-      dot.className = "dot";
-      dot.addEventListener("click", () => goToSlide(index));
-      dotsContainer.appendChild(dot);
-    });
-    goToSlide(0);
-    document.getElementById("prevBtn").addEventListener("click", () => changeSlide(-1));
-    document.getElementById("nextBtn").addEventListener("click", () => changeSlide(1));
-  }
-
-  function goToSlide(index) {
-    currentSlide = index;
-    const slides = document.querySelectorAll(".carousel-slide");
-    const dots = document.querySelectorAll(".dot");
-    const container = document.querySelector(".carousel-slides");
-    if (slides.length === 0) return;
-    const slideWidth = slides[0].clientWidth;
-    container.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-    dots.forEach((dot, i) => {
-      if (i === currentSlide) dot.classList.add("active");
-      else dot.classList.remove("active");
-    });
-  }
-
-  function changeSlide(direction) {
-    let newIndex = currentSlide + direction;
-    if (newIndex < 0) newIndex = slideImages.length - 1;
-    if (newIndex >= slideImages.length) newIndex = 0;
-    goToSlide(newIndex);
-    resetAutoSlide();
-  }
-
-  function startAutoSlide() {
-    autoSlideInterval = setInterval(() => changeSlide(1), 5000);
-  }
-  function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    startAutoSlide();
-  }
-
-  // ======================== TOUCH CARRUSEL ========================
-  function setupTouchCarousel() {
-    const carousel = document.getElementById("carouselSlides");
-    if (!carousel) return;
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    carousel.addEventListener("touchstart", (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    carousel.addEventListener("touchend", (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-      const diff = touchStartX - touchEndX;
-      if (diff > 50) changeSlide(1); // Swipe left
-      else if (diff < -50) changeSlide(-1); // Swipe right
-    }
-  }
-
-  // Inicialización general
-  function init() {
-    renderCombos();
-    renderMenu();
-    renderBebidas();
-    setCurrency("cup");
-    setupDeliveryEvents();
-    document.querySelectorAll('.currency-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => setCurrency(e.target.dataset.currency));
-    });
-    document.getElementById("paymentMethod").addEventListener("change", syncCurrencyWithPaymentMethod);
-    document.getElementById("confirmAgregosBtn").onclick = () => {
-      const checkboxes = document.querySelectorAll("#agregosList input:checked");
-      const seleccionados = Array.from(checkboxes).map(cb => {
-        const nombre = cb.value;
-        const cup = parseFloat(cb.dataset.cup);
-        const usd = parseFloat(cb.dataset.usd);
-        return { nombre, cup, usd };
-      });
-      if (pendingProduct) agregarAlCarrito(pendingProduct, 1, seleccionados);
-      document.getElementById("agregosModal").style.display = "none";
-      pendingProduct = null;
-    };
-    document.getElementById("cancelAgregosBtn").onclick = () => {
-      document.getElementById("agregosModal").style.display = "none";
-      pendingProduct = null;
-    };
-    document.getElementById("cartIcon").onclick = () => document.getElementById("cartDrawer").classList.add("open");
-    document.getElementById("closeCartBtn").onclick = () => document.getElementById("cartDrawer").classList.remove("open");
-    document.getElementById("enviarWhatsappBtn").addEventListener("click", enviarPedidoWhatsApp);
-    loadCarouselImages();
-    setupTouchCarousel();
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  }
-
-  init();
-</script>
-</body>
-</html>
+[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Chu-Chu-Wah | El Expreso del Sabor — Jaruco, Mayabeque</title> <link rel="icon" type="image/png" href="logo.png"> <link rel="apple-touch-icon" href="logo.png"> <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <style>   :root {     --rojo: #C0001A;     --rojo-oscuro: #8B0010;     --amarillo: #FFD700;     --oscuro: #0F0F0F;     --gris: #1A1A1A;     --blanco: #FFFFFF;     --crema: #FFF8E7;   }   * { margin: 0; padding: 0; box-sizing: border-box; }   html { scroll-behavior: smooth; }   body {     font-family: 'Outfit', sans-serif;     background: var(--oscuro);     color: var(--blanco);     overflow-x: hidden;   }   /* NAV */   nav {     position: fixed;     top: 0; left: 0; right: 0;     z-index: 100;     display: flex;     align-items: center;     justify-content: space-between;     padding: 12px 15px;     background: rgba(0,0,0,0.92);     backdrop-filter: blur(12px);     border-bottom: 1px solid rgba(192,0,26,0.3);   }   .nav-logo-img {     height: 40px;     width: auto;     display: block;   }   .hamburger {     display: none;     background: none;     border: none;     color: white;     font-size: 24px;     cursor: pointer;     padding: 6px;     margin-left: 10px;   }   .nav-links {     display: flex;     gap: 16px;     list-style: none;   }   .nav-links a {     color: rgba(255,255,255,0.75);     text-decoration: none;     font-size: 12px;     font-weight: 500;     letter-spacing: 1.5px;     text-transform: uppercase;     transition: color 0.3s;   }   .nav-links a:hover { color: var(--amarillo); }   .currency-switcher {     display: flex;     gap: 8px;     background: rgba(0,0,0,0.6);     padding: 4px 8px;     border-radius: 40px;     backdrop-filter: blur(4px);     border: 1px solid rgba(255,215,0,0.3);   }   .currency-btn {     background: transparent;     border: none;     font-family: 'Outfit', sans-serif;     font-weight: 700;     font-size: 11px;     letter-spacing: 1px;     padding: 4px 10px;     border-radius: 30px;     cursor: pointer;     transition: all 0.2s;     color: rgba(255,255,255,0.6);   }   .currency-btn.active {     background: var(--amarillo);     color: var(--oscuro);     box-shadow: 0 0 6px rgba(255,215,0,0.5);   }   .currency-btn:last-child.active { background: #25D366; color: #0F0F0F; }   /* Language Switcher */   .lang-switcher {     display: flex;     gap: 8px;     background: rgba(0,0,0,0.6);     padding: 4px 8px;     border-radius: 40px;     backdrop-filter: blur(4px);     border: 1px solid rgba(255,215,0,0.3);     margin-left: 10px;   }   .lang-btn {     background: transparent;     border: none;     font-family: 'Outfit', sans-serif;     font-weight: 700;     font-size: 11px;     letter-spacing: 1px;     padding: 4px 10px;     border-radius: 30px;     cursor: pointer;     transition: all 0.2s;     color: rgba(255,255,255,0.6);   }   .lang-btn.active {     background: var(--amarillo);     color: var(--oscuro);   }   /* HERO con carrusel */   .hero {     min-height: 100vh;     display: flex;     flex-direction: column;     align-items: center;     justify-content: center;     text-align: center;     padding: 120px 20px 80px;     position: relative;     overflow: hidden;     background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('img/bg.png');     background-size: cover;     background-position: center 30%;     background-attachment: fixed;   }   .status-banner {     position: fixed;     top: 60px;     left: 0;     right: 0;     padding: 8px;     text-align: center;     font-weight: bold;     font-size: 14px;     z-index: 99;     background: rgba(0,0,0,0.8);   }   .status-open { color: #4CAF50; }   .status-closing { color: #FF9800; }   .status-closed { color: #F44336; }   .digital-only {     position: fixed;     bottom: 0;     left: 0;     right: 0;     padding: 8px;     text-align: center;     font-size: 12px;     background: rgba(0,0,0,0.8);     color: var(--amarillo);     z-index: 99;   }   /* Carrusel mejorado */   .carousel-container {     position: relative;     width: 95%;     max-width: 1200px;     max-height: 550px;     margin: 0 auto 30px auto;     overflow: hidden;     border-radius: 20px;     box-shadow: 0 10px 25px rgba(0,0,0,0.5);     background: rgba(0,0,0,0.3);   }   .carousel-slides {     display: flex;     transition: transform 0.5s ease-in-out;   }   .carousel-slide {     min-width: 100%;     box-sizing: border-box;   }   .carousel-slide img {     width: 100%;     height: auto;     max-height: 500px;     object-fit: cover;     display: block;   }   .carousel-btn {     position: absolute;     top: 50%;     transform: translateY(-50%);     background: rgba(0,0,0,0.6);     color: white;     border: none;     font-size: 2.5rem;     padding: 0 16px;     cursor: pointer;     z-index: 10;     border-radius: 8px;     transition: 0.2s;   }   .carousel-btn:hover {     background: var(--rojo);   }   .prev { left: 15px; }   .next { right: 15px; }   .carousel-dots {     text-align: center;     padding: 12px 0;     background: rgba(0,0,0,0.5);   }   .dot {     display: inline-block;     width: 14px;     height: 14px;     margin: 0 6px;     background: #ccc;     border-radius: 50%;     cursor: pointer;     transition: background 0.3s;   }   .dot.active {     background: var(--amarillo);   }   .hero-logo {     max-width: 200px;     width: 80%;     margin-bottom: 20px;     filter: drop-shadow(0 0 8px rgba(0,0,0,0.5));   }   .hero-eyebrow {     font-size: 12px;     font-weight: 600;     letter-spacing: 4px;     text-transform: uppercase;     color: var(--amarillo);     margin-bottom: 20px;     opacity: 0;     animation: fadeUp 0.8s 0.2s forwards;   }   .hero-title {     font-family: 'Bebas Neue', sans-serif;     font-size: clamp(48px, 12vw, 80px);     line-height: 0.9;     letter-spacing: 4px;     color: var(--blanco);     opacity: 0;     animation: fadeUp 0.9s 0.4s forwards;   }   .hero-title span { color: var(--rojo); display: block; }   .hero-subtitle {     font-family: 'Bebas Neue', sans-serif;     font-size: clamp(18px, 3vw, 28px);     letter-spacing: 8px;     color: var(--amarillo);     margin-top: 12px;     opacity: 0;     animation: fadeUp 0.9s 0.6s forwards;   }   .hero-desc {     max-width: 520px;     margin: 32px auto 0;     font-size: 15px;     line-height: 1.7;     color: rgba(255,255,255,0.85);     font-weight: 300;     opacity: 0;     animation: fadeUp 0.9s 0.8s forwards;   }   .hero-ctas {     display: flex;     gap: 16px;     margin-top: 44px;     flex-wrap: wrap;     justify-content: center;     opacity: 0;     animation: fadeUp 0.9s 1s forwards;   }   .btn-primary {     background: var(--rojo);     color: var(--blanco);     padding: 14px 36px;     border-radius: 4px;     font-size: 13px;     font-weight: 700;     letter-spacing: 2px;     text-transform: uppercase;     text-decoration: none;     transition: background 0.3s, transform 0.2s;     display: inline-block;   }   .btn-primary:hover { background: var(--rojo-oscuro); transform: translateY(-2px); }   .btn-outline {     border: 1.5px solid rgba(255,215,0,0.5);     color: var(--amarillo);     padding: 14px 36px;     border-radius: 4px;     font-size: 13px;     font-weight: 600;     letter-spacing: 2px;     text-transform: uppercase;     text-decoration: none;     transition: all 0.3s;     display: inline-block;   }   .btn-outline:hover {     border-color: var(--amarillo);     background: rgba(255,215,0,0.08);     transform: translateY(-2px);   }   .hero-badges {     display: flex;     gap: 32px;     margin-top: 60px;     flex-wrap: wrap;     justify-content: center;     opacity: 0;     animation: fadeUp 0.9s 1.2s forwards;   }   .badge {     display: flex;     flex-direction: column;     align-items: center;     gap: 6px;   }   .badge-icon { font-size: 24px; }   .badge-text {     font-size: 11px;     font-weight: 600;     letter-spacing: 1.5px;     text-transform: uppercase;     color: rgba(255,255,255,0.7);   }   section {     padding: 50px 20px;     max-width: 1200px;     margin: 0 auto 2rem auto;     background: rgba(15,15,15,0.7);     border-radius: 20px;     box-shadow: 0 10px 30px rgba(0,0,0,0.3);   }   .section-label {     font-size: 11px;     font-weight: 700;     letter-spacing: 4px;     text-transform: uppercase;     color: var(--rojo);     margin-bottom: 12px;   }   .section-title {     font-family: 'Bebas Neue', sans-serif;     font-size: clamp(32px, 6vw, 56px);     line-height: 1;     letter-spacing: 2px;     color: var(--blanco);     margin-bottom: 24px;   }   .section-title em { color: var(--amarillo); font-style: normal; }   .divider {     width: 90%;     height: 2px;     background: linear-gradient(90deg, transparent, var(--rojo), var(--amarillo), var(--rojo), transparent);     margin: 0 auto;   }   /* Combos */   #combos { background: var(--oscuro); }   .combos-grid {     display: grid;     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));     gap: 20px;     margin-top: 32px;   }   .combo-card {     background: var(--gris);     border: 1px solid rgba(255,255,255,0.06);     border-radius: 12px;     padding: 20px;     transition: transform 0.3s, border-color 0.3s;     position: relative;     overflow: hidden;   }   .combo-card::before {     content: '';     position: absolute;     top: 0; left: 0; right: 0;     height: 4px;     background: var(--rojo);   }   .combo-card:hover {     transform: translateY(-5px);     border-color: rgba(192,0,26,0.4);   }   .combo-card.pareja::before { background: var(--amarillo); }   .combo-emoji { font-size: 36px; margin-bottom: 12px; }   .combo-num {     font-size: 11px;     font-weight: 700;     letter-spacing: 3px;     text-transform: uppercase;     color: var(--rojo);     margin-bottom: 6px;   }   .combo-name {     font-family: 'Bebas Neue', sans-serif;     font-size: 24px;     letter-spacing: 1px;     color: var(--blanco);     margin-bottom: 14px;   }   .combo-items li {     font-size: 13px;     color: rgba(255,255,255,0.6);     padding: 4px 0;   }   .combo-price {     display: flex;     justify-content: space-between;     align-items: center;     margin-top: 12px;   }   .combo-price-value {     font-family: 'Bebas Neue', sans-serif;     font-size: 24px;     color: var(--amarillo);   }   .add-to-cart-btn {     background: var(--amarillo);     color: #0F0F0F;     border: none;     padding: 8px 16px;     border-radius: 6px;     font-size: 12px;     font-weight: bold;     cursor: pointer;     transition: 0.2s;   }   .add-to-cart-btn:hover { background: #e6c200; transform: scale(0.98); }   /* Menú */   .menu-items-grid {     display: grid;     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));     gap: 10px;   }   .menu-item {     display: flex;     justify-content: space-between;     align-items: center;     padding: 10px 14px;     background: rgba(255,255,255,0.03);     border-radius: 8px;     border: 1px solid rgba(255,255,255,0.05);   }   .menu-item-name { font-size: 13px; color: rgba(255,255,255,0.8); }   .price-value {     font-size: 13px;     font-weight: 700;     color: var(--amarillo);     margin-left: 12px;   }   .small-add-btn {     background: var(--rojo);     border: none;     color: white;     font-size: 12px;     padding: 5px 12px;     border-radius: 5px;     margin-left: 8px;     cursor: pointer;   }   /* Bebidas */   .bebidas-grid {     display: grid;     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));     gap: 12px;     margin-top: 32px;   }   .bebida-item {     padding: 12px;     background: rgba(255,215,0,0.05);     border: 1px solid rgba(255,215,0,0.15);     border-radius: 8px;     display: flex;     justify-content: space-between;     align-items: center;   }   .bebida-item button {     background: var(--rojo);     border: none;     color: white;     padding: 4px 12px;     border-radius: 5px;     cursor: pointer;   }   .bebidas-nota {     margin-top: 20px;     padding: 12px 18px;     background: rgba(255,215,0,0.05);     border-left: 3px solid var(--amarillo);     font-size: 12px;     color: #ccc;   }   /* CARRITO DRAWER */   .cart-drawer {     position: fixed;     top: 0;     right: -450px;     width: 450px;     max-width: 90vw;     height: 100vh;     background: #111;     z-index: 1000;     box-shadow: -5px 0 20px rgba(0,0,0,0.5);     transition: right 0.3s ease;     display: flex;     flex-direction: column;     border-left: 3px solid var(--rojo);   }   .cart-drawer.open { right: 0; }   .cart-header {     padding: 20px;     background: var(--rojo);     display: flex;     justify-content: space-between;     align-items: center;   }   .cart-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; }   .close-cart { background: none; border: none; color: white; font-size: 28px; cursor: pointer; }   .cart-items { flex: 1; overflow-y: auto; padding: 20px; }   .cart-item {     background: #1e1e1e;     margin-bottom: 12px;     padding: 12px;     border-radius: 8px;   }   .cart-item-title { font-weight: bold; display: flex; justify-content: space-between; }   .cart-item-agregos { font-size: 11px; color: #aaa; margin-top: 4px; }   .cart-item-controls { display: flex; align-items: center; gap: 12px; margin-top: 8px; }   .cart-item-controls button { background: #333; border: none; color: white; width: 28px; height: 28px; border-radius: 4px; cursor: pointer; }   .remove-item { background: #8B0010; margin-left: auto; }   .cart-total { padding: 20px; border-top: 1px solid #333; background: #0a0a0a; }   .cart-total p { display: flex; justify-content: space-between; margin: 8px 0; }   .cart-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }   .btn-checkout { background: #25D366; color: black; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; }   .delivery-form, .payment-method {     margin-top: 16px;     padding: 16px;     background: #1e1e1e;     border-radius: 8px;   }   .delivery-form input, .delivery-form select, .delivery-form textarea, .payment-method select {     width: 100%;     padding: 10px;     margin: 8px 0;     background: #2a2a2a;     border: 1px solid #444;     color: white;     border-radius: 4px;   }   .cart-icon {     position: fixed;     bottom: 30px;     right: 30px;     background: var(--rojo);     width: 60px;     height: 60px;     border-radius: 50%;     display: flex;     align-items: center;     justify-content: center;     cursor: pointer;     z-index: 99;     box-shadow: 0 4px 12px rgba(0,0,0,0.3);     font-size: 28px;   }   .cart-count {     position: absolute;     top: -5px;     right: -5px;     background: var(--amarillo);     color: black;     border-radius: 50%;     width: 24px;     height: 24px;     font-size: 12px;     display: flex;     align-items: center;     justify-content: center;     font-weight: bold;   }   /* Modal agregos */   .modal {     display: none;     position: fixed;     top: 0; left: 0;     width: 100%; height: 100%;     background: rgba(0,0,0,0.85);     z-index: 1100;     justify-content: center;     align-items: center;   }   .modal-content {     background: #1a1a1a;     padding: 24px;     border-radius: 16px;     width: 90%;     max-width: 500px;     max-height: 80vh;     overflow-y: auto;   }   .agregos-list { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }   .agrego-item { display: flex; justify-content: space-between; align-items: center; }   .agrego-item label { display: flex; align-items: center; gap: 8px; }   .modal-buttons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }   @media (max-width: 768px) {     .hamburger { display: block; }     .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: rgba(0,0,0,0.9); padding: 10px 20px; margin: 0; }     .nav-links.show { display: flex; flex-direction: column; gap: 8px; }     .nav-links a { font-size: 14px; padding: 8px 0; }     .currency-switcher, .lang-switcher { margin-top: 10px; }     .carousel-container { width: 100%; border-radius: 12px; }     .carousel-btn { font-size: 1.8rem; padding: 0 10px; }     .prev { left: 5px; }     .next { right: 5px; }     .carousel-slide img { max-height: 300px; }     .cart-drawer { width: 100%; max-width: 100%; }   }   .fade-in {     opacity: 0;     transform: translateY(20px);     transition: opacity 0.7s ease, transform 0.7s ease;   }   .fade-in.visible { opacity: 1; transform: translateY(0); }   @keyframes fadeUp {     from { opacity: 0; transform: translateY(24px); }     to { opacity: 1; transform: translateY(0); }   } </style> </head> <body>  <script>   // Redirigir o bloquear si no es móvil   function isMobileDevice() {     return (typeof window.orientation !== "undefined") ||            (navigator.userAgent.indexOf('IEMobile') !== -1) ||            (navigator.userAgent.indexOf('Android') !== -1) ||            (navigator.userAgent.indexOf('iPhone') !== -1) ||            (navigator.userAgent.indexOf('iPad') !== -1);   }    if (!isMobileDevice()) {     document.addEventListener('DOMContentLoaded', function() {       document.body.innerHTML = `         <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0F0F0F; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; z-index: 99999;">           <img src="logo.png" alt="ChuChuWah Logo" style="width: 120px; margin-bottom: 20px;">           <h1 style="font-family: 'Bebas Neue', sans-serif; font-size: 48px; margin-bottom: 16px;">ChuChuWah</h1>           <p style="font-size: 18px; margin-bottom: 20px;">Esta web solo está disponible para dispositivos móviles.</p>           <p style="font-size: 16px;">Por favor, accede desde tu teléfono.</p>         </div>       `;     });   } </script>  <nav>   <img src="logo.png" alt="ChuChuWah Logo" class="nav-logo-img">   <button class="hamburger" id="hamburger">☰</button>   <ul class="nav-links" id="navLinks">     <li><a href="#combos" data-trans="combos">Combos</a></li>     <li><a href="#menu" data-trans="menu">Menú</a></li>     <li><a href="#bebidas" data-trans="bebidas">Bebidas</a></li>     <li><a href="lmp.html" data-trans="mas-pedido">Lo más pedido</a></li>     <li><a href="#info" data-trans="info">Info</a></li>   </ul>   <div class="lang-switcher">     <button class="lang-btn active" data-lang="es">ES</button>     <button class="lang-btn" data-lang="en">EN</button>   </div>   <div class="currency-switcher">     <button class="currency-btn active" data-currency="cup">🇨🇺 CUP</button>     <button class="currency-btn" data-currency="usd">💵 USD</button>   </div> </nav>  <div class="status-banner" id="statusBanner"></div>  <div class="hero">   <div class="carousel-container" id="carousel">     <div class="carousel-slides" id="carouselSlides"></div>     <button class="carousel-btn prev" id="prevBtn">❮</button>     <button class="carousel-btn next" id="nextBtn">❯</button>     <div class="carousel-dots" id="carouselDots"></div>   </div>    <img src="logo.png" alt="ChuChuWah Logo" class="hero-logo fade-in">   <p class="hero-eyebrow">🚂 Jaruco, Mayabeque, Cuba</p>   <h1 class="hero-title" data-trans="hero-title">CHU<span>CHU</span>WAH</h1>   <p class="hero-subtitle" data-trans="hero-subtitle">El Expreso del Sabor</p>   <p class="hero-desc" data-trans="hero-desc">Comida cubana con alma propia. Pollos, pizzas, mariscos, carnes y mucho más — directo a tu mesa o a tu puerta en todo Mayabeque.</p>   <div class="hero-ctas">     <a href="#menu" class="btn-outline" data-trans="ver-menu">Ver Menú Completo</a>   </div>   <div class="hero-badges">     <div class="badge"><span class="badge-icon">🕐</span><span class="badge-text" data-trans="horario">11am – 10pm</span></div>     <div class="badge"><span class="badge-icon">🛵</span><span class="badge-text" data-trans="delivery">Delivery Mayabeque</span></div>     <div class="badge"><span class="badge-icon">💳</span><span class="badge-text" data-trans="pago">Zelle & CUP</span></div>   </div> </div>  <div class="digital-only" data-trans="digital-only">   Solo para pedidos digitales. No se atiende presencialmente. </div>  <div class="divider"></div>  <section id="combos">   <p class="section-label fade-in" data-trans="ofertas">Nuestras Ofertas</p>   <h2 class="section-title fade-in" data-trans="combos-title">COMBOS <em>ESPECIALES</em></h2>   <div class="combos-grid" id="combos-container"></div> </section>  <div class="divider"></div>  <section id="menu">   <p class="section-label fade-in" data-trans="todo-menu">Todo lo que tenemos</p>   <h2 class="section-title fade-in" data-trans="menu-title">MENÚ <em>COMPLETO</em></h2>   <div id="menu-container"></div> </section>  <div class="divider"></div>  <section id="bebidas">   <p class="section-label fade-in" data-trans="para-tomar">Para tomar</p>   <h2 class="section-title fade-in" data-trans="bebidas-title">NUESTRAS <em>BEBIDAS</em></h2>   <div class="bebidas-grid" id="bebidas-container"></div>   <div class="bebidas-nota" data-trans="bebidas-nota">El precio de las bebidas se consulta al momento del pedido. Se añaden sin costo en el carrito y se facturan aparte.</div> </section>  <div class="pedido-banner" style="background: var(--rojo); padding: 50px 20px; text-align: center; border-radius: 20px; margin: 20px auto; max-width: 1000px;">   <h2 class="pedido-title" style="font-family: 'Bebas Neue', sans-serif; font-size: 48px;" data-trans="listo-pedir">¿LISTO PARA PEDIR?</h2>   <p class="pedido-sub" data-trans="pedido-sub">Delivery disponible a todo Mayabeque • Lunes a Domingo 11am – 10pm</p> </div>  <section id="info">   <p class="section-label fade-in" data-trans="encuentranos">Encuéntranos</p>   <h2 class="section-title fade-in" data-trans="info-title">INFORMACIÓN <em>& CONTACTO</em></h2>   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">     <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">📍</div><div style="font-weight: bold;" data-trans="ubicacion">Jaruco, Mayabeque</div><div data-trans="ubicacion-detalle">Cuba, cerca del tren Hershey</div></div>     <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">🕐</div><div style="font-weight: bold;" data-trans="horario-title">Horario</div><div data-trans="horario-detalle">11am – 10pm (Delivery hasta 10pm)</div></div>     <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">📞</div><div style="font-weight: bold;" data-trans="contacto">Contacto</div><div><a href="tel:47874242" style="color: var(--amarillo);">47874242</a><br><a href="https://wa.me/5350993981" style="color: var(--amarillo);" data-trans="whatsapp">WhatsApp +53 50993981</a></div></div>   </div> </section>  <footer style="background: #080808; padding: 40px; text-align: center; margin-top: 40px;">   <div class="footer-logo" style="font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--amarillo);">CHU·CHU·WAH</div>   <div class="footer-copy" style="color: #555; margin-top: 12px;">© 2026 Restaurante ChuChuWah · Jaruco, Cuba</div> </footer>  <!-- CARRITO DRAWER --> <div class="cart-drawer" id="cartDrawer">   <div class="cart-header"><h3 data-trans="tu-pedido">Tu Pedido</h3><button class="close-cart" id="closeCartBtn">✕</button></div>   <div class="cart-items" id="cartItems"></div>   <div class="cart-total" id="cartTotal">     <div id="totalsArea"></div>     <div class="payment-method">       <label data-trans="metodo-pago">Método de pago:</label>       <select id="paymentMethod">         <option value="CUP (efectivo)">💵 CUP (efectivo)</option>         <option value="Zelle (USD)">💲 Zelle (USD)</option>       </select>     </div>     <div class="delivery-form" id="deliveryFormStatic">       <label data-trans="tipo-pedido">Tipo de pedido:</label>       <select id="deliveryType">         <option value="pickup" data-trans="para-llevar">Para llevar (sin costo extra)</option>         <option value="delivery" data-trans="delivery-dom">Delivery a domicilio (Jaruco +200 CUP / 0.52 USD)</option>         <option value="outside" data-trans="delivery-fuera">Delivery fuera de Jaruco (precio a consultar)</option>       </select>       <div id="deliveryFields" style="display: none;">         <input type="text" id="direccion" placeholder="Dirección completa" data-trans="direccion-placeholder">         <input type="text" id="nombreDestino" placeholder="Nombre de quien recibe" data-trans="nombre-destino">         <input type="tel" id="telefonoDestino" placeholder="Número de celular" data-trans="telefono-destino">       </div>       <textarea id="notas" placeholder="Notas adicionales (opcional)" data-trans="notas-placeholder"></textarea>     </div>     <div class="cart-actions">       <button class="btn-checkout" id="enviarWhatsappBtn" data-trans="pedir-whatsapp">📲 Pedir por WhatsApp</button>     </div>   </div> </div> <div class="cart-icon" id="cartIcon">🛒<span class="cart-count" id="cartCount">0</span></div>  <!-- MODAL AGREGOS --> <div class="modal" id="agregosModal">   <div class="modal-content">     <h3 id="modalTitle" data-trans="agregar-extras">Agregar extras</h3>     <div id="agregosList" class="agregos-list"></div>     <div class="modal-buttons">       <button id="confirmAgregosBtn" class="btn-primary" data-trans="agregar-carrito">Agregar al carrito</button>       <button id="cancelAgregosBtn" class="btn-outline" data-trans="cancelar">Cancelar</button>     </div>   </div> </div>  <script>   // ======================== DATOS DE PRODUCTOS ========================   const productosData = {     "Bistec de pollo": { cup: 1400, usd: 3.61, tipo: "comida", en: "Chicken Steak" },     "Pollo asado": { cup: 1740, usd: 4.49, tipo: "comida", en: "Roast Chicken" },     "Has Gordon Blue de pollo": { cup: 2700, usd: 6.97, tipo: "comida", en: "Chicken Gordon Blue" },     "Juliana de pollo": { cup: 1620, usd: 4.18, tipo: "comida", en: "Chicken Juliana" },     "Fajitas de pollo empanizadas": { cup: 1900, usd: 4.90, tipo: "comida", en: "Breaded Chicken Fajitas" },     "Fricase de pollo": { cup: 1850, usd: 4.77, tipo: "comida", en: "Chicken Fricassee" },     "Alitas de pollo": { cup: 1355, usd: 3.50, tipo: "comida", en: "Chicken Wings" },     "Pizza Chuchu Napole": { cup: 600, usd: 1.55, tipo: "pizza", en: "Chuchu Napole Pizza" },     "Pizza Gouda Napole": { cup: 1200, usd: 3.10, tipo: "pizza", en: "Gouda Napole Pizza" },     "Pizza ChuChuWah Napole": { cup: 2850, usd: 7.35, tipo: "pizza", en: "ChuChuWah Napole Pizza" },     "Pizza ChuChuWah Gouda": { cup: 3450, usd: 8.90, tipo: "pizza", en: "ChuChuWah Gouda Pizza" },     "Pizza Chuchu 4 Estaciones": { cup: 1950, usd: 5.03, tipo: "pizza", en: "Chuchu Four Seasons Pizza" },     "Pizza Gouda 4 Estaciones": { cup: 2560, usd: 6.61, tipo: "pizza", en: "Gouda Four Seasons Pizza" },     "Pizza Gouda Vegetales": { cup: 1190, usd: 3.07, tipo: "pizza", en: "Gouda Vegetable Pizza" },     "Bistec de cerdo grille": { cup: 1920, usd: 4.95, tipo: "comida", en: "Grilled Pork Steak" },     "Bistec Uruguaito": { cup: 3250, usd: 8.39, tipo: "comida", en: "Uruguayan Pork Steak" },     "Juliana de cerdo": { cup: 2150, usd: 5.55, tipo: "comida", en: "Pork Juliana" },     "Fajita de cerdo empanizada": { cup: 2540, usd: 6.55, tipo: "comida", en: "Breaded Pork Fajita" },     "Suprema de cerdo": { cup: 2750, usd: 7.10, tipo: "comida", en: "Pork Supreme" },     "Fricase de cerdo": { cup: 3000, usd: 7.74, tipo: "comida", en: "Pork Fricassee" },     "Masa de cerdo frita": { cup: 2550, usd: 6.58, tipo: "comida", en: "Fried Pork Dough" },     "Rolitillo de cerdo": { cup: 2400, usd: 6.19, tipo: "comida", en: "Pork Roll" },     "Chuletas de cerdo ahumado": { cup: 1950, usd: 5.03, tipo: "comida", en: "Smoked Pork Chops" },     "Lonjas de cerdo asado": { cup: 1900, usd: 4.90, tipo: "comida", en: "Roast Pork Slices" },     "Juliana mixta": { cup: 1900, usd: 4.90, tipo: "comida", en: "Mixed Juliana" },     "Padre mixta empanizada": { cup: 2250, usd: 5.81, tipo: "comida", en: "Mixed Breaded Father" },     "San Jacobo (jamón y queso)": { cup: 940, usd: 2.43, tipo: "comida", en: "San Jacobo (Ham and Cheese)" },     "Lomo ahumado": { cup: 970, usd: 2.50, tipo: "comida", en: "Smoked Loin" },     "Coctel de atún": { cup: 1470, usd: 5.03, tipo: "comida", en: "Tuna Cocktail" },     "Eperlan entrante": { cup: 1950, usd: 7.35, tipo: "comida", en: "Eperlan Starter" },     "Filete de pescado grille": { cup: 2000, usd: 6.92, tipo: "comida", en: "Grilled Fish Fillet" },     "Filete de pescado canciller": { cup: 2680, usd: 8.67, tipo: "comida", en: "Chancellor Fish Fillet" },     "Filetillo de pescado": { cup: 2400, usd: 5.42, tipo: "comida", en: "Small Fish Fillet" },     "Filete de pescado con camarón": { cup: 2100, usd: 5.41, tipo: "comida", en: "Fish Fillet with Shrimp" },     "Spaghetti de queso Gouda": { cup: 940, usd: 2.43, tipo: "pasta", en: "Gouda Cheese Spaghetti" },     "Pan con bistec": { cup: 500, usd: 1.29, tipo: "pan", en: "Steak Sandwich" },     "Bocadito de jamón": { cup: 300, usd: 0.77, tipo: "pan", en: "Ham Snack" },     "Bocadito de jamón y queso": { cup: 550, usd: 1.42, tipo: "pan", en: "Ham and Cheese Snack" },     "Super hamburgueza": { cup: 560, usd: 1.45, tipo: "pan", en: "Super Burger" },     "Super Expreso ChuChuWah": { cup: 730, usd: 1.88, tipo: "pan", en: "Super ChuChuWah Express" },     "Pan con hamburgueza pollo": { cup: 330, usd: 0.85, tipo: "pan", en: "Chicken Burger Sandwich" },     "Café expreso": { cup: 100, usd: 0.26, tipo: "bebida", en: "Espresso Coffee" },     "Café cortadito": { cup: 130, usd: 0.34, tipo: "bebida", en: "Cortadito Coffee" },     "Batido de frutas": { cup: 270, usd: 0.70, tipo: "bebida", en: "Fruit Milkshake" },     "Batido de chocolate": { cup: 500, usd: 1.29, tipo: "bebida", en: "Chocolate Milkshake" },     "Batido de Mamey": { cup: 350, usd: 0.90, tipo: "bebida", en: "Mamey Milkshake" },     "Pan con 2 croquetas": { cup: 230, usd: 0.59, tipo: "pan", en: "2 Croquettes Sandwich" },     "Entremeses surtido": { cup: 850, usd: 2.19, tipo: "comida", en: "Assorted Appetizers" },     "Entremés ChuChuWah": { cup: 1720, usd: 4.44, tipo: "comida", en: "ChuChuWah Appetizer" },     "Bolitas de jamón": { cup: 900, usd: 2.32, tipo: "comida", en: "Ham Balls" },     "Bolitas de queso Gouda": { cup: 1620, usd: 4.18, tipo: "comida", en: "Gouda Cheese Balls" },     "Croquetas (6 unidades)": { cup: 240, usd: 0.62, tipo: "comida", en: "Croquettes (6 units)" },     "Picadera ChuChuWah": { cup: 2200, usd: 5.68, tipo: "comida", en: "ChuChuWah Snack Platter" },     "Ensalada fría": { cup: 200, usd: 0.52, tipo: "comida", en: "Cold Salad" },     "Buñuelos en almíbar": { cup: 250, usd: 0.65, tipo: "comida", en: "Syrup Fritters" },     "Ensalada": { cup: 210, usd: 0.54, tipo: "comida", en: "Salad" },     "Arroz frito": { cup: 1335, usd: 3.45, tipo: "comida", en: "Fried Rice" },     "Arroz blanco": { cup: 245, usd: 0.63, tipo: "comida", en: "White Rice" },     "Arroz moro": { cup: 290, usd: 0.75, tipo: "comida", en: "Moro Rice" },     "Papas pre fritas": { cup: 455, usd: 1.17, tipo: "comida", en: "Pre-fried Potatoes" },     "Vianda frita": { cup: 360, usd: 0.93, tipo: "comida", en: "Fried Vianda" },     "Vianda hervida": { cup: 220, usd: 0.57, tipo: "comida", en: "Boiled Vianda" }   };    const combosData = [     { nombre: "El Expreso", emoji: "🍔", items: ["Super Expreso ChuChuWah", "Papas pre fritas", "Líquido a elegir"], cup: 1185, usd: 3.03, en: { nombre: "The Express", items: ["Super ChuChuWah Express", "Pre-fried Potatoes", "Drink of choice"] } },     { nombre: "El Crujiente", emoji: "🍗", items: ["Fajitas de pollo empanizadas", "Arroz moro", "Líquido a elegir"], cup: 2190, usd: 5.59, en: { nombre: "The Crunchy", items: ["Breaded Chicken Fajitas", "Moro Rice", "Drink of choice"] } },     { nombre: "La Bestia", emoji: "🍕", items: ["Pizza ChuChuWah Napole", "Croquetas (6 uds)", "Líquido a elegir"], cup: 3090, usd: 7.89, en: { nombre: "The Beast", items: ["ChuChuWah Napole Pizza", "Croquettes (6 units)", "Drink of choice"] } },     { nombre: "El Cubano", emoji: "🥩", items: ["Bistec Uruguaito", "Arroz moro", "Ensalada", "Líquido a elegir"], cup: 3750, usd: 9.57, en: { nombre: "The Cuban", items: ["Uruguayan Pork Steak", "Moro Rice", "Salad", "Drink of choice"] } },     { nombre: "Noche ChuChuWah (Pareja)", emoji: "💑", items: ["2x Bistec de pollo", "Arroz frito", "Ensalada", "2 Líquidos"], cup: 4945, usd: 12.63, pareja: true, en: { nombre: "ChuChuWah Night (Couple)", items: ["2x Chicken Steak", "Fried Rice", "Salad", "2 Drinks"] } },     { nombre: "Mar y Amor (Pareja)", emoji: "🐟", items: ["2x Filete de pescado grille", "Arroz frito", "Ensalada fría", "2 Líquidos"], cup: 5535, usd: 14.13, pareja: true, en: { nombre: "Sea and Love (Couple)", items: ["2x Grilled Fish Fillet", "Fried Rice", "Cold Salad", "2 Drinks"] } }   ];    const todosAgregos = [     { nombre: "Hawaiana", cup: 280, usd: 0.72, para: ["pizza"], en: "Hawaiian" },     { nombre: "Jamón", cup: 165, usd: 0.43, para: ["pizza", "pasta", "pan"], en: "Ham" },     { nombre: "Queso Gouda", cup: 450, usd: 1.16, para: ["pizza", "pasta", "pan"], en: "Gouda Cheese" },     { nombre: "Chorizo", cup: 375, usd: 0.97, para: ["pizza", "pasta"], en: "Chorizo" },     { nombre: "Atún", cup: 760, usd: 1.96, para: ["pizza", "pasta"], en: "Tuna" },     { nombre: "Piña", cup: 140, usd: 0.36, para: ["pizza"], en: "Pineapple" },     { nombre: "Bacon", cup: 545, usd: 1.41, para: ["pizza", "pasta", "pan"], en: "Bacon" },     { nombre: "Aceituna", cup: 440, usd: 1.14, para: ["pizza"], en: "Olives" },     { nombre: "Lomo ahumado", cup: 345, usd: 0.89, para: ["pizza", "pasta", "pan"], en: "Smoked Loin" },     { nombre: "Cebolla", cup: 300, usd: 0.77, para: ["pizza", "pasta", "pan"], en: "Onion" },     { nombre: "Pimiento", cup: 125, usd: 0.32, para: ["pizza", "pasta"], en: "Bell Pepper" }   ];    let carrito = [];   let currentCurrency = "cup";   let pendingProduct = null;   let currentLang = "es";    // ======================== TRADUCCIONES ========================   const translations = {     es: {       "combos": "Combos",       "menu": "Menú",       "bebidas": "Bebidas",       "mas-pedido": "Lo más pedido",       "info": "Info",       "hero-title": "CHU<span>CHU</span>WAH",       "hero-subtitle": "El Expreso del Sabor",       "hero-desc": "Comida cubana con alma propia. Pollos, pizzas, mariscos, carnes y mucho más — directo a tu mesa o a tu puerta en todo Mayabeque.",       "ver-menu": "Ver Menú Completo",       "horario": "11am – 10pm",       "delivery": "Delivery Mayabeque",       "pago": "Zelle & CUP",       "ofertas": "Nuestras Ofertas",       "combos-title": "COMBOS <em>ESPECIALES</em>",       "todo-menu": "Todo lo que tenemos",       "menu-title": "MENÚ <em>COMPLETO</em>",       "para-tomar": "Para tomar",       "bebidas-title": "NUESTRAS <em>BEBIDAS</em>",       "bebidas-nota": "El precio de las bebidas se consulta al momento del pedido. Se añaden sin costo en el carrito y se facturan aparte.",       "listo-pedir": "¿LISTO PARA PEDIR?",       "pedido-sub": "Delivery disponible a todo Mayabeque • Lunes a Domingo 11am – 10pm",       "encuentranos": "Encuéntranos",       "info-title": "INFORMACIÓN <em>& CONTACTO</em>",       "ubicacion": "Jaruco, Mayabeque",       "ubicacion-detalle": "Cuba, cerca del tren Hershey",       "horario-title": "Horario",       "horario-detalle": "11am – 10pm (Delivery hasta 10pm)",       "contacto": "Contacto",       "whatsapp": "WhatsApp +53 50993981",       "tu-pedido": "Tu Pedido",       "metodo-pago": "Método de pago:",       "tipo-pedido": "Tipo de pedido:",       "para-llevar": "Para llevar (sin costo extra)",       "delivery-dom": "Delivery a domicilio (Jaruco +200 CUP / 0.52 USD)",       "delivery-fuera": "Delivery fuera de Jaruco (precio a consultar)",       "direccion-placeholder": "Dirección completa",       "nombre-destino": "Nombre de quien recibe",       "telefono-destino": "Número de celular",       "notas-placeholder": "Notas adicionales (opcional)",       "pedir-whatsapp": "📲 Pedir por WhatsApp",       "agregar-extras": "Agregar extras",       "agregar-carrito": "Agregar al carrito",       "cancelar": "Cancelar",       "open": "Abierto",       "closing": "A punto de cerrar",       "closed": "Cerrado",       "digital-only": "Solo para pedidos digitales. No se atiende presencialmente."     },     en: {       "combos": "Combos",       "menu": "Menu",       "bebidas": "Drinks",       "mas-pedido": "Most Ordered",       "info": "Info",       "hero-title": "CHU<span>CHU</span>WAH",       "hero-subtitle": "The Flavor Express",       "hero-desc": "Cuban food with its own soul. Chicken, pizzas, seafood, meats and much more — straight to your table or door throughout Mayabeque.",       "ver-menu": "View Full Menu",       "horario": "11am – 10pm",       "delivery": "Mayabeque Delivery",       "pago": "Zelle & CUP",       "ofertas": "Our Offers",       "combos-title": "SPECIAL <em>COMBOS</em>",       "todo-menu": "Everything we have",       "menu-title": "FULL <em>MENU</em>",       "para-tomar": "To drink",       "bebidas-title": "OUR <em>DRINKS</em>",       "bebidas-nota": "The price of drinks is consulted at the time of order. They are added to the cart at no cost and billed separately.",       "listo-pedir": "READY TO ORDER?",       "pedido-sub": "Delivery available throughout Mayabeque • Monday to Sunday 11am – 10pm",       "encuentranos": "Find Us",       "info-title": "INFORMATION <em>& CONTACT</em>",       "ubicacion": "Jaruco, Mayabeque",       "ubicacion-detalle": "Cuba, near the Hershey train",       "horario-title": "Schedule",       "horario-detalle": "11am – 10pm (Delivery until 10pm)",       "contacto": "Contact",       "whatsapp": "WhatsApp +53 50993981",       "tu-pedido": "Your Order",       "metodo-pago": "Payment method:",       "tipo-pedido": "Order type:",       "para-llevar": "Take away (no extra cost)",       "delivery-dom": "Home delivery (Jaruco +200 CUP / 0.52 USD)",       "delivery-fuera": "Delivery outside Jaruco (price to consult)",       "direccion-placeholder": "Full address",       "nombre-destino": "Recipient's name",       "telefono-destino": "Cell phone number",       "notas-placeholder": "Additional notes (optional)",       "pedir-whatsapp": "📲 Order via WhatsApp",       "agregar-extras": "Add extras",       "agregar-carrito": "Add to cart",       "cancelar": "Cancel",       "open": "Open",       "closing": "Closing soon",       "closed": "Closed",       "digital-only": "Digital orders only. No in-person service."     }   };    function translatePage() {     document.querySelectorAll('[data-trans]').forEach(el => {       const key = el.getAttribute('data-trans');       el.innerHTML = translations[currentLang][key] || el.innerHTML;     });     document.querySelectorAll('.combo-name').forEach((el, i) => {       const combo = combosData[i];       el.textContent = currentLang === "es" ? combo.nombre : combo.en.nombre;     });     document.querySelectorAll('.combo-items').forEach((ul, i) => {       const combo = combosData[i];       const items = currentLang === "es" ? combo.items : combo.en.items;       ul.innerHTML = items.map(item => `<li>${item}</li>`).join('');     });     document.querySelectorAll('.menu-item-name').forEach(el => {       const nombre = el.textContent;       const producto = Object.values(productosData).find(p => p.en === nombre || p.nombre === nombre);       if (producto) el.textContent = currentLang === "es" ? producto.nombre : producto.en;     });     document.querySelectorAll('#deliveryType option').forEach(el => {       const key = el.getAttribute('data-trans');       if (key) el.textContent = translations[currentLang][key];     });     updateStatusBanner();   }    // ======================== HORARIO ========================   function updateStatusBanner() {     const now = new Date();     const hours = now.getHours();     const minutes = now.getMinutes();     const totalMinutes = hours * 60 + minutes;     const openMinutes = 11 * 60; // 11:00     const closeMinutes = 22 * 60; // 22:00     const closingSoonMinutes = 21 * 60; // 21:00     let status, color, message;      if (totalMinutes >= openMinutes && totalMinutes < closeMinutes) {       if (totalMinutes >= closingSoonMinutes) {         status = "closing";         color = "status-closing";         message = translations[currentLang].closing;       } else {         status = "open";         color = "status-open";         message = translations[currentLang].open;       }     } else {       status = "closed";       color = "status-closed";       message = translations[currentLang].closed;     }      const banner = document.getElementById("statusBanner");     banner.innerHTML = `<span class="${color}">● ${message}</span>`;   }    // ======================== MONEDA ========================   function setCurrency(currency) {     currentCurrency = currency;     document.querySelectorAll('.currency-btn').forEach(btn => {       if (btn.dataset.currency === currency) btn.classList.add('active');       else btn.classList.remove('active');     });      // Actualizar precios en combos     document.querySelectorAll('.combo-price-value').forEach(el => {       const cupVal = parseFloat(el.getAttribute('data-cup'));       const usdVal = parseFloat(el.getAttribute('data-usd'));       el.innerText = currency === "cup" ? cupVal + " CUP" : "$" + usdVal.toFixed(2) + " USD";     });      // Actualizar precios en menú     document.querySelectorAll('.price-value').forEach(el => {       const cupVal = parseFloat(el.getAttribute('data-cup'));       const usdVal = parseFloat(el.getAttribute('data-usd'));       el.innerText = currency === "cup" ? cupVal + " CUP" : "$" + usdVal.toFixed(2) + " USD";     });      // Actualizar precios en modal de agregos     const modalAgregos = document.querySelectorAll('#agregosList .agrego-item span:last-child');     modalAgregos.forEach(el => {       const parent = el.parentElement;       const checkbox = parent.querySelector('input');       const cupVal = parseFloat(checkbox.dataset.cup);       const usdVal = parseFloat(checkbox.dataset.usd);       el.innerText = currency === "cup" ? cupVal + " CUP" : "$" + usdVal.toFixed(2) + " USD";     });      // Recalcular todo el carrito     actualizarCarrito();     syncPaymentMethodWithCurrency();   }    function getPriceValue(cup, usd) { return currentCurrency === "cup" ? cup : usd; }   function formatPrice(valor) {     if (currentCurrency === "cup") return Math.round(valor) + " CUP";     else return "$" + valor.toFixed(2) + " USD";   }   function syncPaymentMethodWithCurrency() {     const paymentSelect = document.getElementById("paymentMethod");     if (paymentSelect) paymentSelect.value = currentCurrency === "cup" ? "CUP (efectivo)" : "Zelle (USD)";   }   function syncCurrencyWithPaymentMethod() {     const paymentSelect = document.getElementById("paymentMethod");     if (paymentSelect) {       const newCurrency = paymentSelect.value === "CUP (efectivo)" ? "cup" : "usd";       if (newCurrency !== currentCurrency) setCurrency(newCurrency);     }   }    // ======================== CARRITO ========================   function agregarAlCarrito(productoBase, cantidad, agregosSeleccionados) {     const precioBaseCup = productoBase.cup;     const precioBaseUsd = productoBase.usd;     const extraCosto = agregosSeleccionados.reduce((sum, ag) => sum + (currentCurrency === "cup" ? ag.cup : ag.usd), 0);     const precioUnitario = (currentCurrency === "cup" ? precioBaseCup : precioBaseUsd) + extraCosto;     const key = JSON.stringify({ nombre: productoBase.nombre, agregos: agregosSeleccionados.map(a=>a.nombre).sort() });     const existing = carrito.find(item => JSON.stringify({ nombre: item.nombre, agregos: item.agregos.map(a=>a.nombre).sort() }) === key);     if (existing) existing.cantidad += cantidad;     else carrito.push({       id: Date.now()+Math.random(),       nombre: productoBase.nombre,       tipo: productoBase.tipo,       precioUnitario: precioUnitario,       cantidad: cantidad,       agregos: agregosSeleccionados,       baseCup: precioBaseCup,       baseUsd: precioBaseUsd     });     actualizarCarrito();   }    function actualizarCarrito() {     const cartContainer = document.getElementById("cartItems");     let subtotal = 0, cajasPizza = 0, termopacks = 0;     carrito.forEach(item => {       const precioUnitario = currentCurrency === "cup" ? item.baseCup : item.baseUsd;       const extraCosto = item.agregos.reduce((sum, ag) => sum + (currentCurrency === "cup" ? ag.cup : ag.usd), 0);       item.precioUnitario = precioUnitario + extraCosto;       subtotal += item.precioUnitario * item.cantidad;       if (item.tipo === "pizza") cajasPizza += item.cantidad;       else if (item.tipo === "comida" || item.tipo === "pasta" || item.tipo === "pan") termopacks += item.cantidad;     });      const precioCaja = currentCurrency === "cup" ? 60 : 0.19;     const precioTermo = currentCurrency === "cup" ? 100 : 0.31;     let totalEmpaque = (cajasPizza * precioCaja) + (termopacks * precioTermo);     let deliveryCost = 0;     let deliveryNote = "";     const deliveryType = document.getElementById("deliveryType")?.value;     if (deliveryType === "delivery") deliveryCost = currentCurrency === "cup" ? 200 : 0.52;     else if (deliveryType === "outside") {       deliveryCost = 0;       deliveryNote = " (precio a consultar)";     }     let total = subtotal + totalEmpaque + deliveryCost;      cartContainer.innerHTML = carrito.map((item, idx) => `       <div class="cart-item">         <div class="cart-item-title">${item.nombre} x${item.cantidad} <strong>${formatPrice(item.precioUnitario * item.cantidad)}</strong></div>         ${item.agregos.length ? `<div class="cart-item-agregos">+ ${item.agregos.map(a=>a.nombre).join(', ')}</div>` : ''}         <div class="cart-item-controls">           <button onclick="cambiarCantidad(${idx}, -1)">-</button>           <span>${item.cantidad}</span>           <button onclick="cambiarCantidad(${idx}, 1)">+</button>           <button class="remove-item" onclick="eliminarItem(${idx})" data-trans="eliminar">Eliminar</button>         </div>       </div>     `).join('');     if (carrito.length === 0) cartContainer.innerHTML = `<p data-trans="carrito-vacio">${translations[currentLang]["carrito-vacio"] || "Tu carrito está vacío"}</p>`;     document.getElementById("totalsArea").innerHTML = `       <p><span data-trans="subtotal">Subtotal:</span><span>${formatPrice(subtotal)}</span></p>       <p><span data-trans="empaque">Empaque (caja pizza x${cajasPizza} / termopack x${termopacks}):</span><span>${formatPrice(totalEmpaque)}</span></p>       <p><span data-trans="mensajeria">Mensajería:</span><span>${deliveryType === "outside" ? translations[currentLang].closed : formatPrice(deliveryCost)}</span></p>       <hr><p><strong data-trans="total">Total:</strong><strong>${deliveryType === "outside" ? formatPrice(total) + " + envío a confirmar" : formatPrice(total)}</strong></p>     `;     document.getElementById("cartCount").innerText = carrito.reduce((acc, i) => acc + i.cantidad, 0);     translatePage();   }    window.cambiarCantidad = (idx, delta) => {     let newCant = carrito[idx].cantidad + delta;     if (newCant <= 0) carrito.splice(idx, 1);     else carrito[idx].cantidad = newCant;     actualizarCarrito();   };   window.eliminarItem = (idx) => { carrito.splice(idx, 1); actualizarCarrito(); };    // ======================== RENDERIZADO ========================   function renderCombos() {     const container = document.getElementById("combos-container");     container.innerHTML = combosData.map((c, i) => `       <div class="combo-card ${c.pareja ? 'pareja' : ''} fade-in">         <div class="combo-emoji">${c.emoji}</div>         <div class="combo-num">${c.pareja ? (currentLang === "es" ? 'Pareja' : 'Couple') : (currentLang === "es" ? 'Combo' : 'Combo')}</div>         <div class="combo-name">${currentLang === "es" ? c.nombre : c.en.nombre}</div>         <ul class="combo-items">${(currentLang === "es" ? c.items : c.en.items).map(item => `<li>${item}</li>`).join('')}</ul>         <div class="combo-price">           <span class="combo-price-value" data-cup="${c.cup}" data-usd="${c.usd}">${currentCurrency === "cup" ? c.cup + " CUP" : "$" + c.usd.toFixed(2) + " USD"}</span>           <button class="add-to-cart-btn" data-nombre="${c.nombre}" data-cup="${c.cup}" data-usd="${c.usd}" data-tipo="combo" data-trans="agregar">Agregar</button>         </div>       </div>     `).join('');     document.querySelectorAll('.add-to-cart-btn[data-tipo="combo"]').forEach(btn => {       btn.addEventListener('click', () => {         const nombre = btn.dataset.nombre;         const combo = combosData.find(c => c.nombre === nombre);         agregarAlCarrito({ nombre: combo.nombre, cup: combo.cup, usd: combo.usd, tipo: "combo" }, 1, []);       });     });     translatePage();   }    function renderMenu() {     const container = document.getElementById("menu-container");     const categorias = {       "🍗 Pollo & Cerdo": ["Bistec de pollo","Pollo asado","Has Gordon Blue de pollo","Juliana de pollo","Fajitas de pollo empanizadas","Fricase de pollo","Alitas de pollo","Bistec de cerdo grille","Bistec Uruguaito","Juliana de cerdo","Fajita de cerdo empanizada","Suprema de cerdo","Fricase de cerdo","Masa de cerdo frita","Rolitillo de cerdo","Chuletas de cerdo ahumado","Lonjas de cerdo asado","Juliana mixta","Padre mixta empanizada","San Jacobo (jamón y queso)","Lomo ahumado"],       "🍕 Pizzas": ["Pizza Chuchu Napole","Pizza Gouda Napole","Pizza ChuChuWah Napole","Pizza ChuChuWah Gouda","Pizza Chuchu 4 Estaciones","Pizza Gouda 4 Estaciones","Pizza Gouda Vegetales"],       "🦐 Mariscos & Pescado": ["Coctel de atún","Eperlan entrante","Filete de pescado grille","Filete de pescado canciller","Filetillo de pescado","Filete de pescado con camarón"],       "🍝 Pastas": ["Spaghetti de queso Gouda"],       "☕ Cafetería & Panes": ["Pan con bistec","Bocadito de jamón","Bocadito de jamón y queso","Super hamburgueza","Super Expreso ChuChuWah","Pan con hamburgueza pollo","Café expreso","Café cortadito","Batido de frutas","Batido de chocolate","Batido de Mamey","Pan con 2 croquetas"],       "🥗 Entremeses": ["Entremeses surtido","Entremés ChuChuWah","Bolitas de jamón","Bolitas de queso Gouda","Croquetas (6 unidades)","Picadera ChuChuWah","Ensalada fría","Buñuelos en almíbar"],       "🍚 Guarniciones": ["Ensalada","Arroz frito","Arroz blanco","Arroz moro","Papas pre fritas","Vianda frita","Vianda hervida"]     };     let html = "";     for (let [cat, items] of Object.entries(categorias)) {       html += `<div class="menu-category fade-in" style="margin-bottom: 2rem;"><div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(192,0,26,0.3); padding-bottom: 8px;"><span style="font-size: 24px;">${cat.split(' ')[0]}</span><span style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--amarillo);">${cat.substring(2)}</span></div><div class="menu-items-grid">`;       items.forEach(nombre => {         const p = productosData[nombre];         if (!p) return;         const nombreMostrado = currentLang === "es" ? p.nombre : p.en;         const precioMostrado = currentCurrency === "cup" ? p.cup + " CUP" : "$" + p.usd.toFixed(2) + " USD";         html += `<div class="menu-item"><span class="menu-item-name">${nombreMostrado}</span><span class="price-value" data-cup="${p.cup}" data-usd="${p.usd}">${precioMostrado}</span><button class="small-add-btn" data-nombre="${p.nombre}" data-tipo="${p.tipo}" data-cup="${p.cup}" data-usd="${p.usd}" data-trans="agregar">+</button></div>`;       });       html += `</div></div>`;     }     container.innerHTML = html;     document.querySelectorAll('.small-add-btn').forEach(btn => {       btn.addEventListener('click', () => {         const nombre = btn.dataset.nombre;         const tipo = btn.dataset.tipo;         const cup = parseFloat(btn.dataset.cup);         const usd = parseFloat(btn.dataset.usd);         const producto = Object.values(productosData).find(p => p.nombre === nombre);         if (tipo === "pizza" || tipo === "pasta" || tipo === "pan") {           pendingProduct = { nombre: producto.nombre, cup: producto.cup, usd: producto.usd, tipo: producto.tipo };           mostrarModalAgregos(tipo);         } else {           agregarAlCarrito({ nombre: producto.nombre, cup: producto.cup, usd: producto.usd, tipo: producto.tipo }, 1, []);         }       });     });     translatePage();   }    function mostrarModalAgregos(tipoProducto) {     let filtrados = todosAgregos.filter(ag => ag.para.includes(tipoProducto));     if (tipoProducto === "pan") filtrados = filtrados.filter(ag => !["Hawaiana", "Piña", "Aceituna"].includes(ag.nombre));     const container = document.getElementById("agregosList");     container.innerHTML = filtrados.map(ag => `       <div class="agrego-item">         <label><input type="checkbox" value="${ag.nombre}" data-cup="${ag.cup}" data-usd="${ag.usd}"> ${currentLang === "es" ? ag.nombre : ag.en}</label>         <span>${currentCurrency === "cup" ? ag.cup + " CUP" : "$" + ag.usd.toFixed(2) + " USD"}</span>       </div>     `).join('');     document.getElementById("modalTitle").textContent = `${translations[currentLang]["agregar-extras"]} ${pendingProduct.nombre}`;     document.getElementById("agregosModal").style.display = "flex";   }    function renderBebidas() {     const bebidas = [       { es: "Tigón", en: "Tigón" },       { es: "Malta", en: "Malta" },       { es: "Agua Natural Grande", en: "Large Natural Water" },       { es: "Agua Natural Pequeño", en: "Small Natural Water" },       { es: "Presidente / Widmill", en: "Presidente / Widmill" },       { es: "Heniken / Corona", en: "Heineken / Corona" },       { es: "Energizante", en: "Energy Drink" },       { es: "Jugo de Lata", en: "Canned Juice" },       { es: "Caja de Jugo", en: "Juice Box" },       { es: "Shaka", en: "Shaka" },       { es: "Néctar / Limonada", en: "Nectar / Lemonade" },       { es: "Coca Cola", en: "Coca Cola" },       { es: "Kermato", en: "Kermato" },       { es: "Cristal / Bucanero", en: "Cristal / Bucanero" },       { es: "Pomo de Refresco", en: "Soda Jug" },       { es: "Hollandia / Lander", en: "Hollandia / Lander" },       { es: "Refresco Vaso", en: "Glass Soda" },       { es: "Redbull", en: "Redbull" },       { es: "Refresco Importado", en: "Imported Soda" },       { es: "Batido Mango / Guayaba", en: "Mango / Guava Milkshake" },       { es: "Go Tropic Morena", en: "Go Tropic Morena" },       { es: "Go Tropic Roja", en: "Go Tropic Roja" },       { es: "Batido de Chocolate", en: "Chocolate Milkshake" },       { es: "Vaso de Dispensada", en: "Draft Glass" },       { es: "Jarra de Dispensada", en: "Draft Pitcher" },       { es: "Termo de Dispensada", en: "Draft Thermos" }     ];     const container = document.getElementById("bebidas-container");     container.innerHTML = bebidas.map(b => `       <div class="bebida-item">         <span>${currentLang === "es" ? b.es : b.en}</span>         <button class="add-bebida" data-nombre="${b.es}" data-trans="agregar">Agregar</button>       </div>     `).join('');     document.querySelectorAll('.add-bebida').forEach(btn => {       btn.addEventListener('click', () => {         const nombre = btn.dataset.nombre;         agregarAlCarrito({ nombre: nombre, cup: 0, usd: 0, tipo: "bebida" }, 1, []);       });     });     translatePage();   }    function setupDeliveryEvents() {     const deliverySelect = document.getElementById("deliveryType");     const deliveryFields = document.getElementById("deliveryFields");     if (deliverySelect) {       deliverySelect.addEventListener("change", () => {         if (deliverySelect.value === "delivery" || deliverySelect.value === "outside") {           deliveryFields.style.display = "block";         } else {           deliveryFields.style.display = "none";         }         actualizarCarrito();       });       deliverySelect.dispatchEvent(new Event('change'));     }   }    function enviarPedidoWhatsApp() {     let mensaje = "🍽️ *NUEVO PEDIDO CHUCHUWAH*%0A";     let subtotal = 0, cajas = 0, termo = 0;     carrito.forEach(item => {       subtotal += item.precioUnitario * item.cantidad;       if (item.tipo === "pizza") cajas += item.cantidad;       else if (item.tipo === "comida" || item.tipo === "pasta" || item.tipo === "pan") termo += item.cantidad;       mensaje += `%0A• ${item.nombre} x${item.cantidad} - ${formatPrice(item.precioUnitario * item.cantidad)}`;       if (item.agregos.length) mensaje += ` (Agregos: ${item.agregos.map(a=>a.nombre).join(', ')})`;     });     const precioCaja = currentCurrency === "cup" ? 60 : 0.19;     const precioTermo = currentCurrency === "cup" ? 100 : 0.31;     let totalEmpaque = (cajas * precioCaja) + (termo * precioTermo);     let deliveryCost = 0;     let deliveryNote = "";     const deliveryType = document.getElementById("deliveryType")?.value;     let direccion = "", nombreDestino = "", telefonoDestino = "";     if (deliveryType === "delivery") {       deliveryCost = currentCurrency === "cup" ? 200 : 0.52;       direccion = document.getElementById("direccion")?.value || "";       nombreDestino = document.getElementById("nombreDestino")?.value || "";       telefonoDestino = document.getElementById("telefonoDestino")?.value || "";       mensaje += `%0A%0A🚚 *Delivery a domicilio (Jaruco)* - Costo: ${formatPrice(deliveryCost)}`;       mensaje += `%0A📍 Dirección: ${direccion}`;       mensaje += `%0A👤 Recibe: ${nombreDestino}`;       mensaje += `%0A📞 Celular: ${telefonoDestino}`;     } else if (deliveryType === "outside") {       deliveryCost = 0;       direccion = document.getElementById("direccion")?.value || "";       nombreDestino = document.getElementById("nombreDestino")?.value || "";       telefonoDestino = document.getElementById("telefonoDestino")?.value || "";       mensaje += `%0A%0A🚚 *Delivery fuera de Jaruco* - Costo a acordar con el cliente`;       mensaje += `%0A📍 Dirección: ${direccion}`;       mensaje += `%0A👤 Recibe: ${nombreDestino}`;       mensaje += `%0A📞 Celular: ${telefonoDestino}`;     } else {       mensaje += `%0A%0A🥡 *Para llevar*`;     }     let total = subtotal + totalEmpaque + deliveryCost;     mensaje += `%0A%0A📦 Empaque: +${formatPrice(totalEmpaque)}`;     if (deliveryType === "outside") mensaje += `%0A💰 *Total (sin envío): ${formatPrice(total)}*`;     else mensaje += `%0A💰 *Total: ${formatPrice(total)}*`;     const metodoPago = document.getElementById("paymentMethod")?.value;     mensaje += `%0A💳 Método de pago: ${metodoPago}`;     const notas = document.getElementById("notas")?.value;     if (notas) mensaje += `%0A%0A📝 Notas: ${notas}`;     mensaje += `%0A%0A¡Gracias por tu pedido! 🚂`;     window.open(`https://wa.me/5350993981?text=${mensaje}`, "_blank");   }    // ======================== CARRUSEL ========================   let currentSlide = 0;   let slideImages = [];   let autoSlideInterval;    function loadCarouselImages() {     const maxAttempts = 20;     const promises = [];     for (let i = 1; i <= maxAttempts; i++) {       const img = new Image();       img.src = `img/${i}.png`;       promises.push(new Promise((resolve) => {         img.onload = () => resolve({ id: i, src: `img/${i}.png` });         img.onerror = () => resolve(null);       }));     }     Promise.all(promises).then(results => {       slideImages = results.filter(r => r !== null);       if (slideImages.length === 0) {         document.getElementById("carousel").style.display = "none";         return;       }       buildCarousel();       startAutoSlide();     });   }    function buildCarousel() {     const slidesContainer = document.getElementById("carouselSlides");     const dotsContainer = document.getElementById("carouselDots");     slidesContainer.innerHTML = "";     dotsContainer.innerHTML = "";     slideImages.forEach((img, index) => {       const slideDiv = document.createElement("div");       slideDiv.className = "carousel-slide";       slideDiv.innerHTML = `<img src="${img.src}" alt="Promoción ${img.id}">`;       slidesContainer.appendChild(slideDiv);       const dot = document.createElement("span");       dot.className = "dot";       dot.addEventListener("click", () => goToSlide(index));       dotsContainer.appendChild(dot);     });     goToSlide(0);     document.getElementById("prevBtn").addEventListener("click", () => changeSlide(-1));     document.getElementById("nextBtn").addEventListener("click", () => changeSlide(1));   }    function goToSlide(index) {     currentSlide = index;     const slides = document.querySelectorAll(".carousel-slide");     const dots = document.querySelectorAll(".dot");     const container = document.querySelector(".carousel-slides");     if (slides.length === 0) return;     const slideWidth = slides[0].clientWidth;     container.style.transform = `translateX(-${currentSlide * slideWidth}px)`;     dots.forEach((dot, i) => {       if (i === currentSlide) dot.classList.add("active");       else dot.classList.remove("active");     });   }    function changeSlide(direction) {     let newIndex = currentSlide + direction;     if (newIndex < 0) newIndex = slideImages.length - 1;     if (newIndex >= slideImages.length) newIndex = 0;     goToSlide(newIndex);     resetAutoSlide();   }    function startAutoSlide() {     autoSlideInterval = setInterval(() => changeSlide(1), 5000);   }   function resetAutoSlide() {     clearInterval(autoSlideInterval);     startAutoSlide();   }    function setupTouchCarousel() {     const carousel = document.getElementById("carouselSlides");     if (!carousel) return;      let touchStartX = 0;     let touchEndX = 0;      carousel.addEventListener("touchstart", (e) => {       touchStartX = e.changedTouches[0].screenX;     }, { passive: true });      carousel.addEventListener("touchend", (e) => {       touchEndX = e.changedTouches[0].screenX;       handleSwipe();     }, { passive: true });      function handleSwipe() {       const diff = touchStartX - touchEndX;       if (diff > 50) changeSlide(1);       else if (diff < -50) changeSlide(-1);     }   }    // ======================== INICIO ========================   function init() {     translatePage();     renderCombos();     renderMenu();     renderBebidas();     setCurrency("cup");     setupDeliveryEvents();     document.querySelectorAll('.currency-btn').forEach(btn => {       btn.addEventListener('click', (e) => setCurrency(e.target.dataset.currency));     });     document.querySelectorAll('.lang-btn').forEach(btn => {       btn.addEventListener('click', (e) => {         currentLang = e.target.dataset.lang;         document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));         e.target.classList.add('active');         translatePage();         renderCombos();         renderMenu();         renderBebidas();       });     });     document.getElementById("paymentMethod").addEventListener("change", syncCurrencyWithPaymentMethod);     document.getElementById("confirmAgregosBtn").onclick = () => {       const checkboxes = document.querySelectorAll("#agregosList input:checked");       const seleccionados = Array.from(checkboxes).map(cb => {         const nombre = cb.value;         const ag = todosAgregos.find(a => a.nombre === nombre);         return { nombre: ag.nombre, cup: ag.cup, usd: ag.usd };       });       if (pendingProduct) agregarAlCarrito(pendingProduct, 1, seleccionados);       document.getElementById("agregosModal").style.display = "none";       pendingProduct = null;     };     document.getElementById("cancelAgregosBtn").onclick = () => {       document.getElementById("agregosModal").style.display = "none";       pendingProduct = null;     };     document.getElementById("cartIcon").onclick = () => document.getElementById("cartDrawer").classList.add("open");     document.getElementById("closeCartBtn").onclick = () => document.getElementById("cartDrawer").classList.remove("open");     document.getElementById("enviarWhatsappBtn").addEventListener("click", enviarPedidoWhatsApp);     loadCarouselImages();     setupTouchCarousel();     setupMobileMenu();     setInterval(updateStatusBanner, 60000);     updateStatusBanner();      const observer = new IntersectionObserver((entries) => {       entries.forEach((entry, i) => {         if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80);       });     }, { threshold: 0.08 });     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));   }    function setupMobileMenu() {     const hamburger = document.getElementById('hamburger');     const navLinks = document.getElementById('navLinks');     hamburger.addEventListener('click', () => {       navLinks.classList.toggle('show');     });   }    init(); </script> </body> </html>
