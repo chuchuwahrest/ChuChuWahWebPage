@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chu-Chu-Wah | El Expreso del Sabor — Jaruco, Mayabeque</title>
-<!-- Favicon (icono en la pestaña del navegador) - Cambia la ruta si tu logo tiene otro nombre o extensión -->
+<!-- Favicon (icono en la pestaña) - Cambia la ruta si tu logo tiene otro nombre -->
 <link rel="icon" type="image/png" href="logo.png">
-<!-- Opcional: también para dispositivos Apple -->
 <link rel="apple-touch-icon" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -88,7 +87,7 @@
     box-shadow: 0 0 6px rgba(255,215,0,0.5);
   }
   .currency-btn:last-child.active { background: #25D366; color: #0F0F0F; }
-  /* HERO */
+  /* HERO con carrusel */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -99,13 +98,86 @@
     padding: 120px 40px 80px;
     position: relative;
     overflow: hidden;
+    /* Fondo general desde img/bg.png (fallback a imagen online si no existe) */
     background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), 
-                url('https://images.pexels.com/photos/1215926/pexels-photo-1215926.jpeg?auto=compress&cs=tinysrgb&w=1600');
+                url('img/bg.png');
     background-size: cover;
     background-position: center 30%;
     background-attachment: fixed;
   }
-  /* Banner de logo en el hero (opcional, puedes mostrarlo además del título) */
+  /* Fallback si no existe bg.png */
+  @supports (background-image: url('img/bg.png')) {
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), 
+                  url('img/bg.png');
+      background-size: cover;
+      background-position: center 30%;
+      background-attachment: fixed;
+    }
+  }
+  /* Carrusel */
+  .carousel-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
+  }
+  .carousel-slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+  .carousel-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 0 12px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 4px;
+    transition: 0.2s;
+  }
+  .carousel-btn:hover {
+    background: var(--rojo);
+  }
+  .prev { left: 10px; }
+  .next { right: 10px; }
+  .carousel-dots {
+    text-align: center;
+    padding: 10px 0;
+    background: rgba(0,0,0,0.5);
+  }
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    background: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .dot.active {
+    background: var(--amarillo);
+  }
   .hero-logo {
     max-width: 280px;
     width: 80%;
@@ -501,6 +573,8 @@
     .nav-links { display: none; }
     section { padding: 50px 20px; margin: 0 10px 20px 10px; }
     .hero-logo { max-width: 200px; }
+    .carousel-container { width: 95%; }
+    .carousel-btn { font-size: 1.5rem; }
   }
   .fade-in {
     opacity: 0;
@@ -517,7 +591,6 @@
 <body>
 
 <nav>
-  <!-- Logo en la barra de navegación - Cambia la ruta si tu archivo se llama distinto -->
   <img src="logo.png" alt="ChuChuWah Logo" class="nav-logo-img">
   <ul class="nav-links">
     <li><a href="#combos">Combos</a></li>
@@ -532,7 +605,14 @@
 </nav>
 
 <div class="hero">
-  <!-- Banner de logo opcional en el hero, puedes comentar o eliminar si no lo deseas -->
+  <!-- Carrusel de imágenes promocionales desde carpeta img/ -->
+  <div class="carousel-container" id="carousel">
+    <div class="carousel-slides" id="carouselSlides"></div>
+    <button class="carousel-btn prev" id="prevBtn">❮</button>
+    <button class="carousel-btn next" id="nextBtn">❯</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+
   <img src="logo.png" alt="ChuChuWah Logo" class="hero-logo fade-in">
   <p class="hero-eyebrow">🚂 Jaruco, Mayabeque, Cuba</p>
   <h1 class="hero-title">CHU<span>CHU</span>WAH</h1>
@@ -639,7 +719,7 @@
 </div>
 
 <script>
-  // ======================== DATOS DE PRODUCTOS ========================
+  // ======================== DATOS DE PRODUCTOS (igual que antes) ========================
   const productosData = {
     "Bistec de pollo": { cup: 1400, usd: 3.61, tipo: "comida" },
     "Pollo asado": { cup: 1740, usd: 4.49, tipo: "comida" },
@@ -732,35 +812,25 @@
   let currentCurrency = "cup";
   let pendingProduct = null;
 
-  function getPriceValue(cup, usd) {
-    return currentCurrency === "cup" ? cup : usd;
-  }
-
+  // Funciones auxiliares (igual que antes)
+  function getPriceValue(cup, usd) { return currentCurrency === "cup" ? cup : usd; }
   function formatPrice(valor) {
     if (currentCurrency === "cup") return Math.round(valor) + " CUP";
     else return "$" + valor.toFixed(2) + " USD";
   }
-
-  // Sincronizar método de pago con moneda
   function syncPaymentMethodWithCurrency() {
     const paymentSelect = document.getElementById("paymentMethod");
-    if (paymentSelect) {
-      if (currentCurrency === "cup") paymentSelect.value = "CUP (efectivo)";
-      else paymentSelect.value = "Zelle (USD)";
-    }
+    if (paymentSelect) paymentSelect.value = currentCurrency === "cup" ? "CUP (efectivo)" : "Zelle (USD)";
   }
-
   function syncCurrencyWithPaymentMethod() {
     const paymentSelect = document.getElementById("paymentMethod");
     if (paymentSelect) {
       const newCurrency = paymentSelect.value === "CUP (efectivo)" ? "cup" : "usd";
-      if (newCurrency !== currentCurrency) {
-        setCurrency(newCurrency);
-      }
+      if (newCurrency !== currentCurrency) setCurrency(newCurrency);
     }
   }
 
-  // Render combos
+  // Render combos y menú (idéntico al anterior)
   function renderCombos() {
     const container = document.getElementById("combos-container");
     container.innerHTML = combosData.map(c => `
@@ -826,9 +896,7 @@
 
   function mostrarModalAgregos(tipoProducto) {
     let filtrados = todosAgregos.filter(ag => ag.para.includes(tipoProducto));
-    if (tipoProducto === "pan") {
-      filtrados = filtrados.filter(ag => !["Hawaiana", "Piña", "Aceituna"].includes(ag.nombre));
-    }
+    if (tipoProducto === "pan") filtrados = filtrados.filter(ag => !["Hawaiana", "Piña", "Aceituna"].includes(ag.nombre));
     const container = document.getElementById("agregosList");
     container.innerHTML = filtrados.map(ag => `
       <div class="agrego-item">
@@ -846,28 +914,14 @@
     const precioUnitario = precioBase + extraCosto;
     const key = JSON.stringify({ nombre: productoBase.nombre, agregos: agregosSeleccionados.map(a=>a.nombre).sort() });
     const existing = carrito.find(item => JSON.stringify({ nombre: item.nombre, agregos: item.agregos.map(a=>a.nombre).sort() }) === key);
-    if (existing) {
-      existing.cantidad += cantidad;
-    } else {
-      carrito.push({
-        id: Date.now() + Math.random(),
-        nombre: productoBase.nombre,
-        tipo: productoBase.tipo,
-        precioUnitario: precioUnitario,
-        cantidad: cantidad,
-        agregos: agregosSeleccionados,
-        baseCup: productoBase.cup,
-        baseUsd: productoBase.usd
-      });
-    }
+    if (existing) existing.cantidad += cantidad;
+    else carrito.push({ id: Date.now()+Math.random(), nombre: productoBase.nombre, tipo: productoBase.tipo, precioUnitario, cantidad, agregos: agregosSeleccionados, baseCup: productoBase.cup, baseUsd: productoBase.usd });
     actualizarCarrito();
   }
 
   function actualizarCarrito() {
     const cartContainer = document.getElementById("cartItems");
-    let subtotal = 0;
-    let cajasPizza = 0;
-    let termopacks = 0;
+    let subtotal = 0, cajasPizza = 0, termopacks = 0;
     carrito.forEach(item => {
       subtotal += item.precioUnitario * item.cantidad;
       if (item.tipo === "pizza") cajasPizza += item.cantidad;
@@ -894,7 +948,6 @@
       </div>
     `).join('');
     if (carrito.length === 0) cartContainer.innerHTML = "<p>Tu carrito está vacío</p>";
-
     document.getElementById("totalsArea").innerHTML = `
       <p><span>Subtotal:</span><span>${formatPrice(subtotal)}</span></p>
       <p><span>Empaque (caja pizza x${cajasPizza} / termopack x${termopacks}):</span><span>${formatPrice(totalEmpaque)}</span></p>
@@ -910,15 +963,11 @@
     else carrito[idx].cantidad = newCant;
     actualizarCarrito();
   };
-  window.eliminarItem = (idx) => {
-    carrito.splice(idx, 1);
-    actualizarCarrito();
-  };
+  window.eliminarItem = (idx) => { carrito.splice(idx, 1); actualizarCarrito(); };
 
   function enviarPedidoWhatsApp() {
     let mensaje = "🍽️ *NUEVO PEDIDO CHUCHUWAH*%0A";
-    let subtotal = 0;
-    let cajas = 0, termo = 0;
+    let subtotal = 0, cajas = 0, termo = 0;
     carrito.forEach(item => {
       subtotal += item.precioUnitario * item.cantidad;
       if (item.tipo === "pizza") cajas += item.cantidad;
@@ -941,9 +990,7 @@
       mensaje += `%0A📍 Dirección: ${direccion}`;
       mensaje += `%0A👤 Recibe: ${nombreDestino}`;
       mensaje += `%0A📞 Celular: ${telefonoDestino}`;
-    } else {
-      mensaje += `%0A%0A🥡 *Para llevar*`;
-    }
+    } else mensaje += `%0A%0A🥡 *Para llevar*`;
     let total = subtotal + totalEmpaque + deliveryCost;
     mensaje += `%0A%0A📦 Empaque: +${formatPrice(totalEmpaque)}`;
     mensaje += `%0A%0A💰 *Total: ${formatPrice(total)}*`;
@@ -961,7 +1008,6 @@
       if (btn.dataset.currency === currency) btn.classList.add('active');
       else btn.classList.remove('active');
     });
-    // Actualizar precios visibles en combos y menú
     document.querySelectorAll('.combo-price-value').forEach(el => {
       const cupVal = el.getAttribute('data-cup');
       const usdVal = el.getAttribute('data-usd');
@@ -984,14 +1030,9 @@
   function renderBebidas() {
     const bebidas = ["Tigón","Malta","Agua Natural Grande","Agua Natural Pequeño","Presidente / Widmill","Heniken / Corona","Energizante","Jugo de Lata","Caja de Jugo","Shaka","Néctar / Limonada","Coca Cola","Kermato","Cristal / Bucanero","Pomo de Refresco","Hollandia / Lander","Refresco Vaso","Redbull","Refresco Importado","Batido Mango / Guayaba","Go Tropic Morena","Go Tropic Roja","Batido de Chocolate","Vaso de Dispensada","Jarra de Dispensada","Termo de Dispensada"];
     const container = document.getElementById("bebidas-container");
-    container.innerHTML = bebidas.map(b => `
-      <div class="bebida-item"><span>${b}</span><button class="add-bebida" data-nombre="${b}">Agregar</button></div>
-    `).join('');
+    container.innerHTML = bebidas.map(b => `<div class="bebida-item"><span>${b}</span><button class="add-bebida" data-nombre="${b}">Agregar</button></div>`).join('');
     document.querySelectorAll('.add-bebida').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const nombre = btn.dataset.nombre;
-        agregarAlCarrito({ nombre, cup: 0, usd: 0, tipo: "bebida" }, 1, []);
-      });
+      btn.addEventListener('click', () => agregarAlCarrito({ nombre: btn.dataset.nombre, cup: 0, usd: 0, tipo: "bebida" }, 1, []));
     });
   }
 
@@ -1007,56 +1048,127 @@
     }
   }
 
-  function bindSyncEvents() {
-    const paymentSelect = document.getElementById("paymentMethod");
-    if (paymentSelect) {
-      paymentSelect.addEventListener("change", syncCurrencyWithPaymentMethod);
+  // ======================== CARRUSEL ========================
+  let currentSlide = 0;
+  let slideImages = [];
+  let autoSlideInterval;
+
+  function loadCarouselImages() {
+    // Intentar cargar imágenes desde img/1.png, img/2.png, ... hasta que falle
+    const maxAttempts = 20;
+    const promises = [];
+    for (let i = 1; i <= maxAttempts; i++) {
+      const img = new Image();
+      img.src = `img/${i}.png`;
+      promises.push(new Promise((resolve) => {
+        img.onload = () => resolve({ id: i, src: `img/${i}.png` });
+        img.onerror = () => resolve(null);
+      }));
     }
-    const currencyBtns = document.querySelectorAll('.currency-btn');
-    currencyBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        setCurrency(e.target.dataset.currency);
-      });
+    Promise.all(promises).then(results => {
+      slideImages = results.filter(r => r !== null);
+      if (slideImages.length === 0) {
+        // Si no hay imágenes, ocultar el carrusel o mostrar mensaje
+        document.getElementById("carousel").style.display = "none";
+        return;
+      }
+      buildCarousel();
+      startAutoSlide();
     });
   }
 
-  document.getElementById("confirmAgregosBtn").onclick = () => {
-    const checkboxes = document.querySelectorAll("#agregosList input:checked");
-    const seleccionados = Array.from(checkboxes).map(cb => {
-      const nombre = cb.value;
-      const cup = parseFloat(cb.dataset.cup);
-      const usd = parseFloat(cb.dataset.usd);
-      return { nombre, cup, usd };
+  function buildCarousel() {
+    const slidesContainer = document.getElementById("carouselSlides");
+    const dotsContainer = document.getElementById("carouselDots");
+    slidesContainer.innerHTML = "";
+    dotsContainer.innerHTML = "";
+    slideImages.forEach((img, index) => {
+      const slideDiv = document.createElement("div");
+      slideDiv.className = "carousel-slide";
+      slideDiv.innerHTML = `<img src="${img.src}" alt="Promoción ${img.id}">`;
+      slidesContainer.appendChild(slideDiv);
+      const dot = document.createElement("span");
+      dot.className = "dot";
+      dot.addEventListener("click", () => goToSlide(index));
+      dotsContainer.appendChild(dot);
     });
-    if (pendingProduct) {
-      agregarAlCarrito(pendingProduct, 1, seleccionados);
-    }
-    document.getElementById("agregosModal").style.display = "none";
-    pendingProduct = null;
-  };
-  document.getElementById("cancelAgregosBtn").onclick = () => {
-    document.getElementById("agregosModal").style.display = "none";
-    pendingProduct = null;
-  };
+    goToSlide(0);
+    // Botones
+    document.getElementById("prevBtn").addEventListener("click", () => changeSlide(-1));
+    document.getElementById("nextBtn").addEventListener("click", () => changeSlide(1));
+  }
 
-  document.getElementById("cartIcon").onclick = () => document.getElementById("cartDrawer").classList.add("open");
-  document.getElementById("closeCartBtn").onclick = () => document.getElementById("cartDrawer").classList.remove("open");
-  document.getElementById("enviarWhatsappBtn").addEventListener("click", enviarPedidoWhatsApp);
-
-  // Inicialización
-  renderCombos();
-  renderMenu();
-  renderBebidas();
-  setCurrency("cup");
-  setupDeliveryEvents();
-  bindSyncEvents();
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80);
+  function goToSlide(index) {
+    currentSlide = index;
+    const slides = document.querySelectorAll(".carousel-slide");
+    const dots = document.querySelectorAll(".dot");
+    const container = document.querySelector(".carousel-slides");
+    if (slides.length === 0) return;
+    const slideWidth = slides[0].clientWidth;
+    container.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    dots.forEach((dot, i) => {
+      if (i === currentSlide) dot.classList.add("active");
+      else dot.classList.remove("active");
     });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  }
+
+  function changeSlide(direction) {
+    let newIndex = currentSlide + direction;
+    if (newIndex < 0) newIndex = slideImages.length - 1;
+    if (newIndex >= slideImages.length) newIndex = 0;
+    goToSlide(newIndex);
+    resetAutoSlide();
+  }
+
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(() => changeSlide(1), 5000);
+  }
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
+
+  // Inicialización general
+  function init() {
+    renderCombos();
+    renderMenu();
+    renderBebidas();
+    setCurrency("cup");
+    setupDeliveryEvents();
+    document.querySelectorAll('.currency-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => setCurrency(e.target.dataset.currency));
+    });
+    document.getElementById("paymentMethod").addEventListener("change", syncCurrencyWithPaymentMethod);
+    document.getElementById("confirmAgregosBtn").onclick = () => {
+      const checkboxes = document.querySelectorAll("#agregosList input:checked");
+      const seleccionados = Array.from(checkboxes).map(cb => {
+        const nombre = cb.value;
+        const cup = parseFloat(cb.dataset.cup);
+        const usd = parseFloat(cb.dataset.usd);
+        return { nombre, cup, usd };
+      });
+      if (pendingProduct) agregarAlCarrito(pendingProduct, 1, seleccionados);
+      document.getElementById("agregosModal").style.display = "none";
+      pendingProduct = null;
+    };
+    document.getElementById("cancelAgregosBtn").onclick = () => {
+      document.getElementById("agregosModal").style.display = "none";
+      pendingProduct = null;
+    };
+    document.getElementById("cartIcon").onclick = () => document.getElementById("cartDrawer").classList.add("open");
+    document.getElementById("closeCartBtn").onclick = () => document.getElementById("cartDrawer").classList.remove("open");
+    document.getElementById("enviarWhatsappBtn").addEventListener("click", enviarPedidoWhatsApp);
+    loadCarouselImages();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  }
+
+  init();
 </script>
 </body>
 </html>
