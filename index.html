@@ -115,11 +115,11 @@
       background-attachment: fixed;
     }
   }
-  /* Carrusel */
+  /* Carrusel mejorado - más grande y adaptable */
   .carousel-container {
     position: relative;
-    width: 90%;
-    max-width: 800px;
+    width: 95%;
+    max-width: 1200px;
     margin: 0 auto 30px auto;
     overflow: hidden;
     border-radius: 20px;
@@ -137,7 +137,7 @@
   .carousel-slide img {
     width: 100%;
     height: auto;
-    max-height: 400px;
+    max-height: 500px;
     object-fit: cover;
     display: block;
   }
@@ -148,28 +148,28 @@
     background: rgba(0,0,0,0.6);
     color: white;
     border: none;
-    font-size: 2rem;
-    padding: 0 12px;
+    font-size: 2.5rem;
+    padding: 0 16px;
     cursor: pointer;
     z-index: 10;
-    border-radius: 4px;
+    border-radius: 8px;
     transition: 0.2s;
   }
   .carousel-btn:hover {
     background: var(--rojo);
   }
-  .prev { left: 10px; }
-  .next { right: 10px; }
+  .prev { left: 15px; }
+  .next { right: 15px; }
   .carousel-dots {
     text-align: center;
-    padding: 10px 0;
+    padding: 12px 0;
     background: rgba(0,0,0,0.5);
   }
   .dot {
     display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin: 0 5px;
+    width: 14px;
+    height: 14px;
+    margin: 0 6px;
     background: #ccc;
     border-radius: 50%;
     cursor: pointer;
@@ -573,8 +573,11 @@
     .nav-links { display: none; }
     section { padding: 50px 20px; margin: 0 10px 20px 10px; }
     .hero-logo { max-width: 200px; }
-    .carousel-container { width: 95%; }
-    .carousel-btn { font-size: 1.5rem; }
+    .carousel-container { width: 100%; border-radius: 12px; }
+    .carousel-btn { font-size: 1.8rem; padding: 0 10px; }
+    .prev { left: 5px; }
+    .next { right: 5px; }
+    .carousel-slide img { max-height: 300px; }
   }
   .fade-in {
     opacity: 0;
@@ -691,6 +694,7 @@
       <select id="deliveryType">
         <option value="pickup">Para llevar (sin costo extra)</option>
         <option value="delivery">Delivery a domicilio (Jaruco +200 CUP / 0.52 USD)</option>
+        <option value="outside">Delivery fuera de Jaruco (precio a consultar)</option>
       </select>
       <div id="deliveryFields" style="display: none;">
         <input type="text" id="direccion" placeholder="Dirección completa">
@@ -719,7 +723,7 @@
 </div>
 
 <script>
-  // ======================== DATOS DE PRODUCTOS (igual que antes) ========================
+  // ======================== DATOS DE PRODUCTOS ========================
   const productosData = {
     "Bistec de pollo": { cup: 1400, usd: 3.61, tipo: "comida" },
     "Pollo asado": { cup: 1740, usd: 4.49, tipo: "comida" },
@@ -812,7 +816,6 @@
   let currentCurrency = "cup";
   let pendingProduct = null;
 
-  // Funciones auxiliares (igual que antes)
   function getPriceValue(cup, usd) { return currentCurrency === "cup" ? cup : usd; }
   function formatPrice(valor) {
     if (currentCurrency === "cup") return Math.round(valor) + " CUP";
@@ -830,7 +833,6 @@
     }
   }
 
-  // Render combos y menú (idéntico al anterior)
   function renderCombos() {
     const container = document.getElementById("combos-container");
     container.innerHTML = combosData.map(c => `
@@ -931,8 +933,13 @@
     const precioTermo = currentCurrency === "cup" ? 100 : 0.31;
     let totalEmpaque = (cajasPizza * precioCaja) + (termopacks * precioTermo);
     let deliveryCost = 0;
+    let deliveryNote = "";
     const deliveryType = document.getElementById("deliveryType")?.value;
     if (deliveryType === "delivery") deliveryCost = currentCurrency === "cup" ? 200 : 0.52;
+    else if (deliveryType === "outside") {
+      deliveryCost = 0;
+      deliveryNote = " (precio a consultar)";
+    }
     let total = subtotal + totalEmpaque + deliveryCost;
 
     cartContainer.innerHTML = carrito.map((item, idx) => `
@@ -951,8 +958,8 @@
     document.getElementById("totalsArea").innerHTML = `
       <p><span>Subtotal:</span><span>${formatPrice(subtotal)}</span></p>
       <p><span>Empaque (caja pizza x${cajasPizza} / termopack x${termopacks}):</span><span>${formatPrice(totalEmpaque)}</span></p>
-      <p><span>Mensajería:</span><span>${formatPrice(deliveryCost)}</span></p>
-      <hr><p><strong>Total:</strong><strong>${formatPrice(total)}</strong></p>
+      <p><span>Mensajería:</span><span>${deliveryType === "outside" ? "A consultar" : formatPrice(deliveryCost)}</span></p>
+      <hr><p><strong>Total:</strong><strong>${deliveryType === "outside" ? formatPrice(total) + " + envío a confirmar" : formatPrice(total)}</strong></p>
     `;
     document.getElementById("cartCount").innerText = carrito.reduce((acc, i) => acc + i.cantidad, 0);
   }
@@ -979,6 +986,7 @@
     const precioTermo = currentCurrency === "cup" ? 100 : 0.31;
     let totalEmpaque = (cajas * precioCaja) + (termo * precioTermo);
     let deliveryCost = 0;
+    let deliveryNote = "";
     const deliveryType = document.getElementById("deliveryType")?.value;
     let direccion = "", nombreDestino = "", telefonoDestino = "";
     if (deliveryType === "delivery") {
@@ -986,14 +994,26 @@
       direccion = document.getElementById("direccion")?.value || "";
       nombreDestino = document.getElementById("nombreDestino")?.value || "";
       telefonoDestino = document.getElementById("telefonoDestino")?.value || "";
-      mensaje += `%0A%0A🚚 *Delivery a domicilio* (${formatPrice(deliveryCost)})`;
+      mensaje += `%0A%0A🚚 *Delivery a domicilio (Jaruco)* - Costo: ${formatPrice(deliveryCost)}`;
       mensaje += `%0A📍 Dirección: ${direccion}`;
       mensaje += `%0A👤 Recibe: ${nombreDestino}`;
       mensaje += `%0A📞 Celular: ${telefonoDestino}`;
-    } else mensaje += `%0A%0A🥡 *Para llevar*`;
+    } else if (deliveryType === "outside") {
+      deliveryCost = 0;
+      direccion = document.getElementById("direccion")?.value || "";
+      nombreDestino = document.getElementById("nombreDestino")?.value || "";
+      telefonoDestino = document.getElementById("telefonoDestino")?.value || "";
+      mensaje += `%0A%0A🚚 *Delivery fuera de Jaruco* - Costo a acordar con el cliente`;
+      mensaje += `%0A📍 Dirección: ${direccion}`;
+      mensaje += `%0A👤 Recibe: ${nombreDestino}`;
+      mensaje += `%0A📞 Celular: ${telefonoDestino}`;
+    } else {
+      mensaje += `%0A%0A🥡 *Para llevar*`;
+    }
     let total = subtotal + totalEmpaque + deliveryCost;
     mensaje += `%0A%0A📦 Empaque: +${formatPrice(totalEmpaque)}`;
-    mensaje += `%0A%0A💰 *Total: ${formatPrice(total)}*`;
+    if (deliveryType === "outside") mensaje += `%0A💰 *Total (sin envío): ${formatPrice(total)}*`;
+    else mensaje += `%0A💰 *Total: ${formatPrice(total)}*`;
     const metodoPago = document.getElementById("paymentMethod")?.value;
     mensaje += `%0A💳 Método de pago: ${metodoPago}`;
     const notas = document.getElementById("notas")?.value;
@@ -1041,7 +1061,12 @@
     const deliveryFields = document.getElementById("deliveryFields");
     if (deliverySelect) {
       deliverySelect.addEventListener("change", () => {
-        deliveryFields.style.display = deliverySelect.value === "delivery" ? "block" : "none";
+        // Mostrar campos de dirección para cualquier tipo de delivery (incluyendo fuera de Jaruco)
+        if (deliverySelect.value === "delivery" || deliverySelect.value === "outside") {
+          deliveryFields.style.display = "block";
+        } else {
+          deliveryFields.style.display = "none";
+        }
         actualizarCarrito();
       });
       deliverySelect.dispatchEvent(new Event('change'));
@@ -1054,7 +1079,6 @@
   let autoSlideInterval;
 
   function loadCarouselImages() {
-    // Intentar cargar imágenes desde img/1.png, img/2.png, ... hasta que falle
     const maxAttempts = 20;
     const promises = [];
     for (let i = 1; i <= maxAttempts; i++) {
@@ -1068,7 +1092,6 @@
     Promise.all(promises).then(results => {
       slideImages = results.filter(r => r !== null);
       if (slideImages.length === 0) {
-        // Si no hay imágenes, ocultar el carrusel o mostrar mensaje
         document.getElementById("carousel").style.display = "none";
         return;
       }
@@ -1093,7 +1116,6 @@
       dotsContainer.appendChild(dot);
     });
     goToSlide(0);
-    // Botones
     document.getElementById("prevBtn").addEventListener("click", () => changeSlide(-1));
     document.getElementById("nextBtn").addEventListener("click", () => changeSlide(1));
   }
