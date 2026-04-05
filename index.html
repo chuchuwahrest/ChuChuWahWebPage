@@ -686,7 +686,7 @@
   </div>
 </nav>
 
-<!-- Estado del restaurante -->
+<!-- Estado del restaurante - se actualiza dinámicamente (verde: abierto, naranja: a punto de cerrar, rojo: cerrado) -->
 <div class="restaurant-status" id="restaurantStatus">
   <span class="status-icon">🕒</span>
   <span class="status-text">Cerrado</span>
@@ -925,19 +925,20 @@
     }
   }
 
-  // ======================== ESTADO DEL RESTAURANTE ========================
+  // ======================== ESTADO DEL RESTAURANTE (Verde: Abierto, Naranja: A punto de cerrar, Rojo: Cerrado) ========================
   function updateRestaurantStatus() {
     const statusElement = document.getElementById('restaurantStatus');
     const now = new Date();
     const currentHour = now.getHours();
-    const openTime = 11; // 11 AM
-    const closeTime = 22; // 10 PM
-    const closingSoonTime = 21; // 9 PM
+    const openTime = 11;     // 11:00 AM
+    const closeTime = 22;    // 10:00 PM
+    const closingSoonTime = 21; // 9:00 PM (a punto de cerrar)
 
     let statusClass = 'status-closed';
     let statusText = "Cerrado";
 
-    if (currentHour > openTime && currentHour < closeTime) {
+    // Verificar si está dentro del horario de apertura (>= openTime y < closeTime)
+    if (currentHour >= openTime && currentHour < closeTime) {
       if (currentHour >= closingSoonTime) {
         statusClass = 'status-closing';
         statusText = "A punto de cerrar";
@@ -945,6 +946,9 @@
         statusClass = 'status-open';
         statusText = "Abierto";
       }
+    } else {
+      statusClass = 'status-closed';
+      statusText = "Cerrado";
     }
 
     statusElement.className = `restaurant-status ${statusClass}`;
