@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chu-Chu-Wah | El Expreso del Sabor — Jaruco, Mayabeque</title>
+<!-- Favicon (icono en la pestaña del navegador) - Cambia la ruta si tu logo tiene otro nombre o extensión -->
+<link rel="icon" type="image/png" href="logo.png">
+<!-- Opcional: también para dispositivos Apple -->
+<link rel="apple-touch-icon" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -31,17 +35,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 40px;
+    padding: 12px 40px;
     background: rgba(0,0,0,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(192,0,26,0.3);
   }
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--amarillo);
-    letter-spacing: 3px;
-    text-decoration: none;
+  .nav-logo-img {
+    height: 50px;
+    width: auto;
+    display: block;
   }
   .nav-links {
     display: flex;
@@ -102,6 +104,13 @@
     background-size: cover;
     background-position: center 30%;
     background-attachment: fixed;
+  }
+  /* Banner de logo en el hero (opcional, puedes mostrarlo además del título) */
+  .hero-logo {
+    max-width: 280px;
+    width: 80%;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 8px rgba(0,0,0,0.5));
   }
   .hero-eyebrow {
     font-size: 12px;
@@ -487,9 +496,11 @@
   .agrego-item label { display: flex; align-items: center; gap: 8px; }
   .modal-buttons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
   @media (max-width: 768px) {
-    nav { padding: 14px 20px; flex-wrap: wrap; }
+    nav { padding: 10px 20px; flex-wrap: wrap; }
+    .nav-logo-img { height: 40px; }
     .nav-links { display: none; }
     section { padding: 50px 20px; margin: 0 10px 20px 10px; }
+    .hero-logo { max-width: 200px; }
   }
   .fade-in {
     opacity: 0;
@@ -506,7 +517,8 @@
 <body>
 
 <nav>
-  <a href="#" class="nav-logo">CHU·CHU·WAH</a>
+  <!-- Logo en la barra de navegación - Cambia la ruta si tu archivo se llama distinto -->
+  <img src="logo.png" alt="ChuChuWah Logo" class="nav-logo-img">
   <ul class="nav-links">
     <li><a href="#combos">Combos</a></li>
     <li><a href="#menu">Menú</a></li>
@@ -520,6 +532,8 @@
 </nav>
 
 <div class="hero">
+  <!-- Banner de logo opcional en el hero, puedes comentar o eliminar si no lo deseas -->
+  <img src="logo.png" alt="ChuChuWah Logo" class="hero-logo fade-in">
   <p class="hero-eyebrow">🚂 Jaruco, Mayabeque, Cuba</p>
   <h1 class="hero-title">CHU<span>CHU</span>WAH</h1>
   <p class="hero-subtitle">El Expreso del Sabor</p>
@@ -993,7 +1007,6 @@
     }
   }
 
-  // Eventos de sincronización
   function bindSyncEvents() {
     const paymentSelect = document.getElementById("paymentMethod");
     if (paymentSelect) {
