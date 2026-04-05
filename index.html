@@ -206,10 +206,17 @@
     text-transform: uppercase;
     color: rgba(255,255,255,0.7);
   }
+  /* Secciones con separación */
+  section, .divider, .pedido-banner {
+    margin-bottom: 2rem;
+  }
   section {
-    padding: 100px 40px;
+    padding: 80px 40px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto 2rem auto;
+    background: rgba(15,15,15,0.7);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
   .section-label {
     font-size: 11px;
@@ -229,23 +236,23 @@
   }
   .section-title em { color: var(--amarillo); font-style: normal; }
   .divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(192,0,26,0.5), transparent);
-    margin: 0;
+    width: 90%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--rojo), var(--amarillo), var(--rojo), transparent);
+    margin: 0 auto;
   }
   /* Combos */
   #combos { background: var(--oscuro); }
   .combos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+    gap: 25px;
     margin-top: 48px;
   }
   .combo-card {
     background: var(--gris);
     border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 28px;
     transition: transform 0.3s, border-color 0.3s;
     position: relative;
@@ -255,13 +262,17 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
+    height: 4px;
     background: var(--rojo);
   }
+  .combo-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(192,0,26,0.4);
+  }
   .combo-card.pareja::before { background: var(--amarillo); }
-  .combo-emoji { font-size: 32px; margin-bottom: 12px; }
+  .combo-emoji { font-size: 36px; margin-bottom: 12px; }
   .combo-num {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -275,56 +286,39 @@
     color: var(--blanco);
     margin-bottom: 14px;
   }
-  .combo-items {
-    list-style: none;
-    margin-bottom: 20px;
-  }
   .combo-items li {
     font-size: 13px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.6);
     padding: 4px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .combo-items li::before {
-    content: '—';
-    color: var(--rojo);
-    font-size: 10px;
   }
   .combo-price {
     display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     margin-top: 12px;
   }
   .combo-price-value {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    color: var(--blanco);
+    font-size: 24px;
+    color: var(--amarillo);
   }
   .add-to-cart-btn {
     background: var(--amarillo);
     color: #0F0F0F;
     border: none;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.2s;
-    margin-top: 12px;
-    width: 100%;
   }
   .add-to-cart-btn:hover { background: #e6c200; transform: scale(0.98); }
   /* Menú */
   .menu-items-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
   }
   .menu-item {
     display: flex;
@@ -332,26 +326,23 @@
     align-items: center;
     padding: 10px 14px;
     background: rgba(255,255,255,0.03);
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.04);
-    transition: background 0.2s;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
   }
-  .menu-item:hover { background: rgba(192,0,26,0.08); }
-  .menu-item-name { font-size: 13px; color: rgba(255,255,255,0.75); }
+  .menu-item-name { font-size: 13px; color: rgba(255,255,255,0.8); }
   .price-value {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--amarillo);
-    white-space: nowrap;
     margin-left: 12px;
   }
   .small-add-btn {
     background: var(--rojo);
     border: none;
     color: white;
-    font-size: 11px;
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 5px;
     margin-left: 8px;
     cursor: pointer;
   }
@@ -359,17 +350,14 @@
   .bebidas-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 10px;
+    gap: 12px;
     margin-top: 40px;
   }
   .bebida-item {
-    padding: 12px 16px;
-    background: rgba(255,215,0,0.04);
-    border: 1px solid rgba(255,215,0,0.12);
-    border-radius: 6px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
-    text-align: center;
+    padding: 12px;
+    background: rgba(255,215,0,0.05);
+    border: 1px solid rgba(255,215,0,0.15);
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -378,20 +366,17 @@
     background: var(--rojo);
     border: none;
     color: white;
-    padding: 4px 10px;
-    border-radius: 4px;
+    padding: 4px 12px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 11px;
   }
   .bebidas-nota {
     margin-top: 20px;
-    padding: 14px 20px;
+    padding: 12px 18px;
     background: rgba(255,215,0,0.05);
     border-left: 3px solid var(--amarillo);
-    border-radius: 0 6px 6px 0;
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    font-style: italic;
+    font-size: 12px;
+    color: #ccc;
   }
   /* CARRITO DRAWER */
   .cart-drawer {
@@ -407,7 +392,7 @@
     transition: right 0.3s ease;
     display: flex;
     flex-direction: column;
-    border-left: 2px solid var(--rojo);
+    border-left: 3px solid var(--rojo);
   }
   .cart-drawer.open { right: 0; }
   .cart-header {
@@ -430,20 +415,18 @@
   .cart-item-agregos { font-size: 11px; color: #aaa; margin-top: 4px; }
   .cart-item-controls { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
   .cart-item-controls button { background: #333; border: none; color: white; width: 28px; height: 28px; border-radius: 4px; cursor: pointer; }
-  .cart-item-controls span { font-size: 14px; }
   .remove-item { background: #8B0010; margin-left: auto; }
   .cart-total { padding: 20px; border-top: 1px solid #333; background: #0a0a0a; }
   .cart-total p { display: flex; justify-content: space-between; margin: 8px 0; }
   .cart-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
-  .cart-actions button, .cart-actions a { text-align: center; padding: 12px; border-radius: 4px; text-decoration: none; font-weight: bold; }
-  .btn-checkout { background: #25D366; color: black; border: none; cursor: pointer; }
-  .delivery-form {
-    margin-top: 20px;
+  .btn-checkout { background: #25D366; color: black; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+  .delivery-form, .payment-method {
+    margin-top: 16px;
     padding: 16px;
     background: #1e1e1e;
     border-radius: 8px;
   }
-  .delivery-form input, .delivery-form select, .delivery-form textarea {
+  .delivery-form input, .delivery-form select, .delivery-form textarea, .payment-method select {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
@@ -452,7 +435,6 @@
     color: white;
     border-radius: 4px;
   }
-  .delivery-form label { font-size: 12px; color: #aaa; display: block; margin-top: 8px; }
   .cart-icon {
     position: fixed;
     bottom: 30px;
@@ -488,8 +470,9 @@
   .modal {
     display: none;
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
     z-index: 1100;
     justify-content: center;
     align-items: center;
@@ -497,7 +480,7 @@
   .modal-content {
     background: #1a1a1a;
     padding: 24px;
-    border-radius: 12px;
+    border-radius: 16px;
     width: 90%;
     max-width: 500px;
     max-height: 80vh;
@@ -508,12 +491,9 @@
   .agrego-item label { display: flex; align-items: center; gap: 8px; }
   .modal-buttons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
   @media (max-width: 768px) {
-    nav { padding: 14px 20px; flex-wrap: wrap; gap: 12px; }
+    nav { padding: 14px 20px; flex-wrap: wrap; }
     .nav-links { display: none; }
-    .currency-switcher { order: 2; margin-left: auto; }
-    section { padding: 70px 20px; }
-    .hero { padding: 100px 20px 60px; background-attachment: scroll; }
-    .cart-drawer { width: 100%; right: -100%; }
+    section { padding: 50px 20px; margin: 0 10px 20px 10px; }
   }
   .fade-in {
     opacity: 0;
@@ -536,7 +516,6 @@
     <li><a href="#menu">Menú</a></li>
     <li><a href="#bebidas">Bebidas</a></li>
     <li><a href="#info">Info</a></li>
-    <li><a href="https://wa.me/5350993981" target="_blank">Pedir Ahora</a></li>
   </ul>
   <div class="currency-switcher">
     <button class="currency-btn active" data-currency="cup">🇨🇺 CUP</button>
@@ -572,7 +551,6 @@
 <section id="menu">
   <p class="section-label fade-in">Todo lo que tenemos</p>
   <h2 class="section-title fade-in">MENÚ <em>COMPLETO</em></h2>
-  <p style="color:rgba(255,255,255,0.45); font-size:13px;" class="fade-in">Precios en CUP • Vigentes 2025 (cambia a USD)</p>
   <div id="menu-container"></div>
 </section>
 
@@ -582,28 +560,27 @@
   <p class="section-label fade-in">Para tomar</p>
   <h2 class="section-title fade-in">NUESTRAS <em>BEBIDAS</em></h2>
   <div class="bebidas-grid" id="bebidas-container"></div>
-  <div class="bebidas-nota">El precio de las bebidas se consulta al momento del pedido. Se añadirán sin costo en el carrito, pero se facturarán aparte.</div>
+  <div class="bebidas-nota">El precio de las bebidas se consulta al momento del pedido. Se añaden sin costo en el carrito y se facturan aparte.</div>
 </section>
 
-<div class="pedido-banner" style="background: var(--rojo); padding: 60px 40px; text-align: center;">
-  <h2 class="pedido-title">¿LISTO PARA PEDIR?</h2>
+<div class="pedido-banner" style="background: var(--rojo); padding: 50px 20px; text-align: center; border-radius: 20px; margin: 20px auto; max-width: 1000px;">
+  <h2 class="pedido-title" style="font-family: 'Bebas Neue', sans-serif; font-size: 48px;">¿LISTO PARA PEDIR?</h2>
   <p class="pedido-sub">Delivery disponible a todo Mayabeque • Lunes a Domingo 11am – 10pm</p>
 </div>
 
 <section id="info">
   <p class="section-label fade-in">Encuéntranos</p>
   <h2 class="section-title fade-in">INFORMACIÓN <em>& CONTACTO</em></h2>
-  <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
-    <div class="info-card fade-in"><div class="info-card-icon">📍</div><div class="info-card-title">Ubicación</div><div class="info-card-content"><strong>Jaruco, Mayabeque</strong><br>Cuba<br>Cerca de la línea del tren Hershey</div></div>
-    <div class="info-card fade-in"><div class="info-card-icon">🕐</div><div class="info-card-title">Horario</div><div class="info-card-content"><strong>Todos los días</strong><br>11:00am – 10:00pm<br>Delivery: 11:00am – 6:00pm</div></div>
-    <div class="info-card fade-in"><div class="info-card-icon">📞</div><div class="info-card-title">Teléfono & WhatsApp</div><div class="info-card-content"><a href="tel:47874242"><strong>47874242</strong></a><br><a href="https://wa.me/5350993981" target="_blank">WhatsApp: +53 50993981</a></div></div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+    <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">📍</div><div style="font-weight: bold;">Jaruco, Mayabeque</div><div>Cuba, cerca del tren Hershey</div></div>
+    <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">🕐</div><div style="font-weight: bold;">Horario</div><div>11am – 10pm (Delivery hasta 6pm)</div></div>
+    <div class="info-card" style="background: #1a1a1a; padding: 24px; border-radius: 12px;"><div style="font-size: 28px;">📞</div><div style="font-weight: bold;">Contacto</div><div><a href="tel:47874242" style="color: var(--amarillo);">47874242</a><br><a href="https://wa.me/5350993981" style="color: var(--amarillo);">WhatsApp +53 50993981</a></div></div>
   </div>
 </section>
 
-<footer style="background: #080808; padding: 48px 40px; text-align: center;">
-  <div class="footer-logo">CHU·CHU·WAH</div>
-  <div class="footer-tagline">El Expreso del Sabor — Jaruco, Mayabeque, Cuba</div>
-  <div class="footer-copy">© 2025 Restaurante ChuChuWah</div>
+<footer style="background: #080808; padding: 40px; text-align: center; margin-top: 40px;">
+  <div class="footer-logo" style="font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--amarillo);">CHU·CHU·WAH</div>
+  <div class="footer-copy" style="color: #555; margin-top: 12px;">© 2025 Restaurante ChuChuWah · Jaruco, Cuba</div>
 </footer>
 
 <!-- CARRITO DRAWER -->
@@ -612,6 +589,13 @@
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-total" id="cartTotal">
     <div id="totalsArea"></div>
+    <div class="payment-method">
+      <label>Método de pago:</label>
+      <select id="paymentMethod">
+        <option value="CUP (efectivo)">💵 CUP (efectivo)</option>
+        <option value="Zelle (USD)">💲 Zelle (USD)</option>
+      </select>
+    </div>
     <div class="delivery-form" id="deliveryFormStatic">
       <label>Tipo de pedido:</label>
       <select id="deliveryType">
@@ -632,10 +616,10 @@
 </div>
 <div class="cart-icon" id="cartIcon">🛒<span class="cart-count" id="cartCount">0</span></div>
 
-<!-- MODAL AGREGOS -->
+<!-- MODAL AGREGOS (dinámico según tipo) -->
 <div class="modal" id="agregosModal">
   <div class="modal-content">
-    <h3>Agregar extras a tu pizza</h3>
+    <h3 id="modalTitle">Agregar extras</h3>
     <div id="agregosList" class="agregos-list"></div>
     <div class="modal-buttons">
       <button id="confirmAgregosBtn" class="btn-primary">Agregar al carrito</button>
@@ -645,7 +629,7 @@
 </div>
 
 <script>
-  // ======================== DATOS ========================
+  // ======================== DATOS DE PRODUCTOS ========================
   const productosData = {
     "Bistec de pollo": { cup: 1400, usd: 3.61, tipo: "comida" },
     "Pollo asado": { cup: 1740, usd: 4.49, tipo: "comida" },
@@ -681,19 +665,19 @@
     "Filete de pescado canciller": { cup: 2680, usd: 8.67, tipo: "comida" },
     "Filetillo de pescado": { cup: 2400, usd: 5.42, tipo: "comida" },
     "Filete de pescado con camarón": { cup: 2100, usd: 5.41, tipo: "comida" },
-    "Spaghetti de queso Gouda": { cup: 940, usd: 2.43, tipo: "comida" },
-    "Pan con bistec": { cup: 500, usd: 1.29, tipo: "comida" },
-    "Bocadito de jamón": { cup: 300, usd: 0.77, tipo: "comida" },
-    "Bocadito de jamón y queso": { cup: 550, usd: 1.42, tipo: "comida" },
-    "Super hamburgueza": { cup: 560, usd: 1.45, tipo: "comida" },
-    "Super Expreso ChuChuWah": { cup: 730, usd: 1.88, tipo: "comida" },
-    "Pan con hamburgueza pollo": { cup: 330, usd: 0.85, tipo: "comida" },
+    "Spaghetti de queso Gouda": { cup: 940, usd: 2.43, tipo: "pasta" },
+    "Pan con bistec": { cup: 500, usd: 1.29, tipo: "pan" },
+    "Bocadito de jamón": { cup: 300, usd: 0.77, tipo: "pan" },
+    "Bocadito de jamón y queso": { cup: 550, usd: 1.42, tipo: "pan" },
+    "Super hamburgueza": { cup: 560, usd: 1.45, tipo: "pan" },
+    "Super Expreso ChuChuWah": { cup: 730, usd: 1.88, tipo: "pan" },
+    "Pan con hamburgueza pollo": { cup: 330, usd: 0.85, tipo: "pan" },
     "Café expreso": { cup: 100, usd: 0.26, tipo: "bebida" },
     "Café cortadito": { cup: 130, usd: 0.34, tipo: "bebida" },
     "Batido de frutas": { cup: 270, usd: 0.70, tipo: "bebida" },
     "Batido de chocolate": { cup: 500, usd: 1.29, tipo: "bebida" },
     "Batido de Mamey": { cup: 350, usd: 0.90, tipo: "bebida" },
-    "Pan con 2 croquetas": { cup: 230, usd: 0.59, tipo: "comida" },
+    "Pan con 2 croquetas": { cup: 230, usd: 0.59, tipo: "pan" },
     "Entremeses surtido": { cup: 850, usd: 2.19, tipo: "comida" },
     "Entremés ChuChuWah": { cup: 1720, usd: 4.44, tipo: "comida" },
     "Bolitas de jamón": { cup: 900, usd: 2.32, tipo: "comida" },
@@ -720,26 +704,28 @@
     { nombre: "Mar y Amor (Pareja)", emoji: "🐟", items: ["2x Filete de pescado grille", "Arroz frito", "Ensalada fría", "2 Líquidos"], cup: 5535, usd: 14.13, pareja: true }
   ];
 
-  const agregos = [
-    { nombre: "Hawaiana", cup: 280, usd: 0.72 },
-    { nombre: "Jamón", cup: 165, usd: 0.43 },
-    { nombre: "Queso Gouda", cup: 450, usd: 1.16 },
-    { nombre: "Chorizo", cup: 375, usd: 0.97 },
-    { nombre: "Atún", cup: 760, usd: 1.96 },
-    { nombre: "Piña", cup: 140, usd: 0.36 },
-    { nombre: "Bacon", cup: 545, usd: 1.41 },
-    { nombre: "Aceituna", cup: 440, usd: 1.14 },
-    { nombre: "Lomo ahumado", cup: 345, usd: 0.89 },
-    { nombre: "Cebolla", cup: 300, usd: 0.77 },
-    { nombre: "Pimiento", cup: 125, usd: 0.32 }
+  // Agregos completos
+  const todosAgregos = [
+    { nombre: "Hawaiana", cup: 280, usd: 0.72, para: ["pizza"] },
+    { nombre: "Jamón", cup: 165, usd: 0.43, para: ["pizza", "pasta", "pan"] },
+    { nombre: "Queso Gouda", cup: 450, usd: 1.16, para: ["pizza", "pasta", "pan"] },
+    { nombre: "Chorizo", cup: 375, usd: 0.97, para: ["pizza", "pasta"] },
+    { nombre: "Atún", cup: 760, usd: 1.96, para: ["pizza", "pasta"] },
+    { nombre: "Piña", cup: 140, usd: 0.36, para: ["pizza"] },
+    { nombre: "Bacon", cup: 545, usd: 1.41, para: ["pizza", "pasta", "pan"] },
+    { nombre: "Aceituna", cup: 440, usd: 1.14, para: ["pizza"] },
+    { nombre: "Lomo ahumado", cup: 345, usd: 0.89, para: ["pizza", "pasta", "pan"] },
+    { nombre: "Cebolla", cup: 300, usd: 0.77, para: ["pizza", "pasta", "pan"] },
+    { nombre: "Pimiento", cup: 125, usd: 0.32, para: ["pizza", "pasta"] }
   ];
 
-  let carrito = [];
+  let carrito = []; // cada item: { id, nombre, tipo, precioBase, agregos, cantidad, baseCup, baseUsd }
   let currentCurrency = "cup";
   let pendingProduct = null;
+  let pendingTipo = null;
 
-  function getPrice(producto, moneda = currentCurrency) {
-    return moneda === "cup" ? producto.cup : producto.usd;
+  function getPriceValue(cup, usd) {
+    return currentCurrency === "cup" ? cup : usd;
   }
 
   function formatPrice(valor) {
@@ -747,6 +733,7 @@
     else return "$" + valor.toFixed(2) + " USD";
   }
 
+  // Render combos estáticos con data attributes
   function renderCombos() {
     const container = document.getElementById("combos-container");
     container.innerHTML = combosData.map(c => `
@@ -756,17 +743,17 @@
         <div class="combo-name">${c.nombre}</div>
         <ul class="combo-items">${c.items.map(i => `<li>${i}</li>`).join('')}</ul>
         <div class="combo-price">
-          <span class="combo-price-value">${currentCurrency === "cup" ? c.cup + " CUP" : "$" + c.usd + " USD"}</span>
-          <button class="add-to-cart-btn" data-nombre="${c.nombre}" data-cup="${c.cup}" data-usd="${c.usd}" data-escombo="true">Agregar al carrito</button>
+          <span class="combo-price-value" data-cup="${c.cup} CUP" data-usd="$${c.usd} USD">${currentCurrency === "cup" ? c.cup + " CUP" : "$" + c.usd + " USD"}</span>
+          <button class="add-to-cart-btn" data-nombre="${c.nombre}" data-cup="${c.cup}" data-usd="${c.usd}" data-tipo="combo">Agregar</button>
         </div>
       </div>
     `).join('');
-    document.querySelectorAll('.add-to-cart-btn[data-escombo="true"]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+    document.querySelectorAll('.add-to-cart-btn[data-tipo="combo"]').forEach(btn => {
+      btn.addEventListener('click', () => {
         const nombre = btn.dataset.nombre;
         const cup = parseFloat(btn.dataset.cup);
         const usd = parseFloat(btn.dataset.usd);
-        agregarAlCarrito({ nombre: nombre, cup: cup, usd: usd, tipo: "combo" }, 1, []);
+        agregarAlCarrito({ nombre, cup, usd, tipo: "combo" }, 1, []);
       });
     });
   }
@@ -784,57 +771,69 @@
     };
     let html = "";
     for (let [cat, items] of Object.entries(categorias)) {
-      html += `<div class="menu-category fade-in"><div class="menu-cat-header"><span class="menu-cat-icon">${cat.split(' ')[0]}</span><span class="menu-cat-name">${cat.substring(2)}</span></div><div class="menu-items-grid">`;
+      html += `<div class="menu-category fade-in" style="margin-bottom: 2rem;"><div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(192,0,26,0.3); padding-bottom: 8px;"><span style="font-size: 24px;">${cat.split(' ')[0]}</span><span style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--amarillo);">${cat.substring(2)}</span></div><div class="menu-items-grid">`;
       items.forEach(nombre => {
         const p = productosData[nombre];
         if (!p) return;
-        const precioActual = currentCurrency === "cup" ? p.cup + " CUP" : "$" + p.usd + " USD";
-        html += `<div class="menu-item"><span class="menu-item-name">${nombre}</span><span class="price-value">${precioActual}</span><button class="small-add-btn" data-nombre="${nombre}">+</button></div>`;
+        const precioMostrado = currentCurrency === "cup" ? p.cup + " CUP" : "$" + p.usd + " USD";
+        html += `<div class="menu-item"><span class="menu-item-name">${nombre}</span><span class="price-value" data-cup="${p.cup}" data-usd="${p.usd}">${precioMostrado}</span><button class="small-add-btn" data-nombre="${nombre}" data-tipo="${p.tipo}" data-cup="${p.cup}" data-usd="${p.usd}">+</button></div>`;
       });
       html += `</div></div>`;
     }
     container.innerHTML = html;
     document.querySelectorAll('.small-add-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         const nombre = btn.dataset.nombre;
-        const prod = productosData[nombre];
-        if (!prod) return;
-        if (prod.tipo === "pizza") {
-          pendingProduct = { ...prod, nombre };
-          mostrarModalAgregos();
+        const tipo = btn.dataset.tipo;
+        const cup = parseFloat(btn.dataset.cup);
+        const usd = parseFloat(btn.dataset.usd);
+        if (tipo === "pizza" || tipo === "pasta" || tipo === "pan") {
+          pendingProduct = { nombre, cup, usd, tipo };
+          mostrarModalAgregos(tipo);
         } else {
-          agregarAlCarrito({ nombre: nombre, cup: prod.cup, usd: prod.usd, tipo: prod.tipo }, 1, []);
+          agregarAlCarrito({ nombre, cup, usd, tipo }, 1, []);
         }
       });
     });
   }
 
-  function mostrarModalAgregos() {
+  function mostrarModalAgregos(tipoProducto) {
+    let filtrados = todosAgregos.filter(ag => ag.para.includes(tipoProducto));
+    if (tipoProducto === "pan") {
+      filtrados = filtrados.filter(ag => !["Hawaiana", "Piña", "Aceituna"].includes(ag.nombre));
+    }
     const container = document.getElementById("agregosList");
-    container.innerHTML = agregos.map(ag => `
+    container.innerHTML = filtrados.map(ag => `
       <div class="agrego-item">
         <label><input type="checkbox" value="${ag.nombre}" data-cup="${ag.cup}" data-usd="${ag.usd}"> ${ag.nombre}</label>
         <span>${currentCurrency === "cup" ? ag.cup + " CUP" : "$" + ag.usd + " USD"}</span>
       </div>
     `).join('');
+    document.getElementById("modalTitle").innerText = `Agregar extras a ${pendingProduct.nombre}`;
     document.getElementById("agregosModal").style.display = "flex";
   }
 
   function agregarAlCarrito(productoBase, cantidad, agregosSeleccionados) {
-    let precioBase = getPrice(productoBase);
-    let extraCosto = agregosSeleccionados.reduce((sum, ag) => sum + getPrice(ag), 0);
-    let precioUnitario = precioBase + extraCosto;
-    const item = {
-      id: Date.now() + Math.random(),
-      nombre: productoBase.nombre,
-      precioUnitario: precioUnitario,
-      cantidad: cantidad,
-      agregos: agregosSeleccionados,
-      tipo: productoBase.tipo || "comida",
-      baseCup: productoBase.cup,
-      baseUsd: productoBase.usd
-    };
-    carrito.push(item);
+    const precioBase = getPriceValue(productoBase.cup, productoBase.usd);
+    const extraCosto = agregosSeleccionados.reduce((sum, ag) => sum + getPriceValue(ag.cup, ag.usd), 0);
+    const precioUnitario = precioBase + extraCosto;
+    // Buscar si ya existe un item idéntico (mismo nombre y mismos agregos)
+    const key = JSON.stringify({ nombre: productoBase.nombre, agregos: agregosSeleccionados.map(a=>a.nombre).sort() });
+    const existing = carrito.find(item => JSON.stringify({ nombre: item.nombre, agregos: item.agregos.map(a=>a.nombre).sort() }) === key);
+    if (existing) {
+      existing.cantidad += cantidad;
+    } else {
+      carrito.push({
+        id: Date.now() + Math.random(),
+        nombre: productoBase.nombre,
+        tipo: productoBase.tipo,
+        precioUnitario: precioUnitario,
+        cantidad: cantidad,
+        agregos: agregosSeleccionados,
+        baseCup: productoBase.cup,
+        baseUsd: productoBase.usd
+      });
+    }
     actualizarCarrito();
   }
 
@@ -846,8 +845,7 @@
     carrito.forEach(item => {
       subtotal += item.precioUnitario * item.cantidad;
       if (item.tipo === "pizza") cajasPizza += item.cantidad;
-      else if (item.tipo === "comida") termopacks += item.cantidad;
-      // combos no generan empaque extra (ya incluido)
+      else if (item.tipo === "comida" || item.tipo === "pasta" || item.tipo === "pan") termopacks += item.cantidad;
     });
     const precioCaja = currentCurrency === "cup" ? 60 : 0.19;
     const precioTermo = currentCurrency === "cup" ? 100 : 0.31;
@@ -898,7 +896,7 @@
     carrito.forEach(item => {
       subtotal += item.precioUnitario * item.cantidad;
       if (item.tipo === "pizza") cajas += item.cantidad;
-      else if (item.tipo === "comida") termo += item.cantidad;
+      else if (item.tipo === "comida" || item.tipo === "pasta" || item.tipo === "pan") termo += item.cantidad;
       mensaje += `%0A• ${item.nombre} x${item.cantidad} - ${formatPrice(item.precioUnitario * item.cantidad)}`;
       if (item.agregos.length) mensaje += ` (Agregos: ${item.agregos.map(a=>a.nombre).join(', ')})`;
     });
@@ -923,6 +921,8 @@
     let total = subtotal + totalEmpaque + deliveryCost;
     mensaje += `%0A%0A📦 Empaque: +${formatPrice(totalEmpaque)}`;
     mensaje += `%0A%0A💰 *Total: ${formatPrice(total)}*`;
+    const metodoPago = document.getElementById("paymentMethod")?.value;
+    mensaje += `%0A💳 Método de pago: ${metodoPago}`;
     const notas = document.getElementById("notas")?.value;
     if (notas) mensaje += `%0A%0A📝 Notas: ${notas}`;
     mensaje += `%0A%0A¡Gracias por tu pedido! 🚂`;
@@ -935,31 +935,41 @@
       if (btn.dataset.currency === currency) btn.classList.add('active');
       else btn.classList.remove('active');
     });
-    renderCombos();
-    renderMenu();
+    // Actualizar precios visibles en combos y menú sin re-renderizar completamente (solo texto)
+    document.querySelectorAll('.combo-price-value').forEach(el => {
+      const cupVal = el.getAttribute('data-cup');
+      const usdVal = el.getAttribute('data-usd');
+      if (cupVal && usdVal) el.innerText = currency === "cup" ? cupVal : usdVal;
+    });
+    document.querySelectorAll('.price-value').forEach(el => {
+      const cupVal = el.getAttribute('data-cup');
+      const usdVal = el.getAttribute('data-usd');
+      if (cupVal && usdVal) el.innerText = currency === "cup" ? cupVal + " CUP" : "$" + usdVal + " USD";
+      else if (el.getAttribute('data-cup')) {
+        const cup = parseFloat(el.getAttribute('data-cup'));
+        const usd = parseFloat(el.getAttribute('data-usd'));
+        el.innerText = currency === "cup" ? cup + " CUP" : "$" + usd + " USD";
+      }
+    });
+    // Actualizar carrito y totales
     actualizarCarrito();
-    renderBebidas();
   }
 
   function renderBebidas() {
     const bebidas = ["Tigón","Malta","Agua Natural Grande","Agua Natural Pequeño","Presidente / Widmill","Heniken / Corona","Energizante","Jugo de Lata","Caja de Jugo","Shaka","Néctar / Limonada","Coca Cola","Kermato","Cristal / Bucanero","Pomo de Refresco","Hollandia / Lander","Refresco Vaso","Redbull","Refresco Importado","Batido Mango / Guayaba","Go Tropic Morena","Go Tropic Roja","Batido de Chocolate","Vaso de Dispensada","Jarra de Dispensada","Termo de Dispensada"];
     const container = document.getElementById("bebidas-container");
     container.innerHTML = bebidas.map(b => `
-      <div class="bebida-item">
-        <span>${b}</span>
-        <button class="add-bebida" data-nombre="${b}">Agregar</button>
-      </div>
+      <div class="bebida-item"><span>${b}</span><button class="add-bebida" data-nombre="${b}">Agregar</button></div>
     `).join('');
     document.querySelectorAll('.add-bebida').forEach(btn => {
       btn.addEventListener('click', () => {
         const nombre = btn.dataset.nombre;
-        agregarAlCarrito({ nombre: nombre, cup: 0, usd: 0, tipo: "bebida" }, 1, []);
-        actualizarCarrito();
+        agregarAlCarrito({ nombre, cup: 0, usd: 0, tipo: "bebida" }, 1, []);
       });
     });
   }
 
-  // Eventos del formulario de delivery
+  // Eventos del formulario
   function setupDeliveryEvents() {
     const deliverySelect = document.getElementById("deliveryType");
     const deliveryFields = document.getElementById("deliveryFields");
@@ -981,7 +991,7 @@
       return { nombre, cup, usd };
     });
     if (pendingProduct) {
-      agregarAlCarrito({ nombre: pendingProduct.nombre, cup: pendingProduct.cup, usd: pendingProduct.usd, tipo: "pizza" }, 1, seleccionados);
+      agregarAlCarrito(pendingProduct, 1, seleccionados);
     }
     document.getElementById("agregosModal").style.display = "none";
     pendingProduct = null;
@@ -995,7 +1005,7 @@
   document.getElementById("closeCartBtn").onclick = () => document.getElementById("cartDrawer").classList.remove("open");
   document.getElementById("enviarWhatsappBtn").addEventListener("click", enviarPedidoWhatsApp);
 
-  // Inicializar
+  // Inicialización
   renderCombos();
   renderMenu();
   renderBebidas();
